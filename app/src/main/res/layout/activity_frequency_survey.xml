@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_frequency_survey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/greybackground"
+    tools:context="com.example.karol.wbt.SurveyActivities.FrequencySurvey">
+
+    <TextView
+        android:id="@+id/frequency_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/frequency"
+        android:textColor="@android:color/background_light"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_weight="0.12"/>
+
+    <RadioGroup
+        android:id="@+id/frequency_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="457dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.08">
+
+        <RadioButton
+            android:id="@+id/opt_1_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/once_twice"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="SmallSp" />
+
+        <RadioButton
+            android:id="@+id/opt_3_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/three_four"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="SmallSp" />
+
+        <RadioButton
+            android:id="@+id/opt_5_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/five_six"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="SmallSp" />
+
+        <RadioButton
+            android:id="@+id/opt_7_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/seven_or_more"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="SmallSp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/moves_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_back_next_hint"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        android:layout_weight="0.20"
+        android:textAlignment="center"/>
+
+</LinearLayout>

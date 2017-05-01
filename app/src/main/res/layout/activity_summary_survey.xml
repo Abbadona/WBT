@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:background="@drawable/greybackground"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/summary_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/summary"
+
+        android:textColor="@android:color/background_light"
+        android:textSize="50sp"
+        android:textStyle="bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/summary_textView"
+        android:orientation="horizontal"
+        tools:ignore="DisableBaselineAlignment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/beauty_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/login_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/login_eng"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/first_name"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/lastname_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/last_name"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/email_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/email"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/phone_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/phone_number"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/verify_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/verification_way"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/age_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/age"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/height_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/height"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/weight_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/weight"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/frequency_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/frequency"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/advancement_level_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/advance_level"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/goal_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/goal"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/beauty_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/login_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/name_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/lastname_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/email_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/phone_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/verify_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/age_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/height_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/weight_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/frequency_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/advancement_level_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/goal_summary_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="@android:color/background_light"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/blank_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/table_layout"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/move_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blank_textview"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/go_back_next_hint"
+        android:textColor="@android:color/background_light"
+        tools:ignore="ObsoleteLayoutParam"
+        android:textSize="14sp"/>
+
+</RelativeLayout>

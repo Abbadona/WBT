@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_parameters"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.karol.wbt.SurveyActivities.UserParametersSurvey"
+    android:orientation="vertical"
+    android:background="@drawable/greybackground"
+    >
+
+    <TextView
+        android:id="@+id/give_parameters"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/user_parameters"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/age_text"
+        android:layout_weight="1"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/height_text"
+        android:layout_weight="1.00"
+        android:hint="@string/height"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weight_text"
+        android:layout_weight="1"
+        android:hint="@string/weight"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/moves_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_back_next_hint"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        android:layout_weight="0.20"
+        android:textAlignment="center"/>
+
+</LinearLayout>
