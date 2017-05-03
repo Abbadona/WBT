@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
+import com.example.karol.wbt.SurveyActivities.ContactSurvey;
 import com.example.karol.wbt.SurveyActivities.FrequencySurvey;
 import com.example.karol.wbt.UtilitiesPackage.LearnGesture;
 import com.example.karol.wbt.UtilitiesPackage.MySurveyPageActivity;
@@ -30,7 +31,7 @@ public class SignUpActivity extends MySurveyPageActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        super.gestureObject = new GestureDetectorCompat(this,new LearnGesture(this,null,new Intent(this, FrequencySurvey.class)));
+        super.gestureObject = new GestureDetectorCompat(this,new LearnGesture(this,null,new Intent(this, ContactSurvey.class)));
         parameters = new HashMap<>();
         loginEditText = (EditText)this.findViewById(R.id.login_up_sur);
         passEditText = (EditText)this.findViewById(R.id.password_up_sur);

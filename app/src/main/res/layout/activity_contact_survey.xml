@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_contact_survey"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.karol.wbt.SurveyActivities.ContactSurvey"
+    android:orientation="vertical"
+    android:background="@drawable/greybackground"
+    android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/dane_kontaktowe"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:id="@+id/contact_title"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/number_text"
+        android:layout_weight="1"
+        android:hint="@string/phone_number"
+        android:inputType="number"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/email_text"
+        android:hint="@string/email_address"
+        android:textColor="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:inputType="textEmailAddress"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <TextView
+            android:text="@string/verify_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/verify_text"
+            android:textSize="20sp"
+            android:textColor="@android:color/background_light"
+            android:layout_weight="1"/>
+
+        <RadioGroup
+            android:id="@+id/verification_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/email_opt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email_verification"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/phone_opt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_verification"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp"
+                android:layout_weight="1"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space_of_beauty"
+        android:text="@string/empty_text"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/moves_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_back_next_hint"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        android:layout_weight="0.20"
+        android:textAlignment="center"/>
+
+</LinearLayout>

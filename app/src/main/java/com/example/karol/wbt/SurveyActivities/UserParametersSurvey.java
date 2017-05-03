@@ -22,8 +22,8 @@ public class UserParametersSurvey extends MySurveyPageActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_parameters_survey);
         super.gestureObject = new GestureDetectorCompat(this, new LearnGesture(
-                                                        this, new Intent(this, FrequencySurvey.class),
-                                                        new Intent(this, SummarySurvey.class)));
+                                                        this, new Intent(this, ContactSurvey.class),
+                                                        new Intent(this, FrequencySurvey.class)));
         age = (EditText)findViewById(R.id.age_text);
         height = (EditText)findViewById(R.id.height_text);
         weight = (EditText)findViewById(R.id.weight_text);
@@ -39,9 +39,9 @@ public class UserParametersSurvey extends MySurveyPageActivity{
         weight.setText(parameters.get("weight"));
     }
 
-    public boolean addParameter(EditText field, String type, boolean isRequired){
+    public boolean addParameter(EditText field, String type){
         String text = field.getText().toString();
-        if(isRequired && text.isEmpty()){
+        if(text.isEmpty()){
             field.setError("Wypełnij pole");
             return false;
         }
@@ -52,9 +52,9 @@ public class UserParametersSurvey extends MySurveyPageActivity{
     }
 
     public boolean onTouchEvent(MotionEvent event){
-        addParameter(age, "age", true);
-        addParameter(height, "height", true);
-        addParameter(weight, "weight", true);
+        addParameter(age, "age");
+        addParameter(height, "height");
+        addParameter(weight, "weight");
 
         if(isEditTextFilled(age) && isEditTextFilled(height) && isEditTextFilled(weight)){
             addStringPreferences(parameters);

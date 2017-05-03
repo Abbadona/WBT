@@ -1,6 +1,5 @@
 package com.example.karol.wbt.SurveyActivities;
 import com.example.karol.wbt.R;
-import com.example.karol.wbt.SignUpActivity;
 import com.example.karol.wbt.UtilitiesPackage.LearnGesture;
 import com.example.karol.wbt.UtilitiesPackage.MySurveyPageActivity;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class FrequencySurvey extends MySurveyPageActivity{
-    private int selectedId = -1;
     private RadioButton optOnceTwice;
     private RadioButton optThreeFour;
     private RadioButton optFiveSix;
@@ -23,8 +21,8 @@ public class FrequencySurvey extends MySurveyPageActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frequency_survey);
         super.gestureObject = new GestureDetectorCompat(this, new LearnGesture(
-                                                        this, new Intent(this, SignUpActivity.class),
-                                                        new Intent(this, UserParametersSurvey.class)));
+                                                        this, new Intent(this, UserParametersSurvey.class),
+                                                        new Intent(this, AdvancementLevelSurvey.class)));
         optOnceTwice = (RadioButton)findViewById(R.id.opt_1_2);
         optThreeFour = (RadioButton)findViewById(R.id.opt_3_4);
         optFiveSix = (RadioButton)findViewById(R.id.opt_5_6);
@@ -46,7 +44,7 @@ public class FrequencySurvey extends MySurveyPageActivity{
     }
 
     public boolean onTouchEvent(MotionEvent event){
-        selectedId = options.getCheckedRadioButtonId();
+        int selectedId = options.getCheckedRadioButtonId();
         if(selectedId != -1){
             RadioButton selectedButton = (RadioButton)findViewById(selectedId);
             String selectedOption = selectedButton.getText().toString();

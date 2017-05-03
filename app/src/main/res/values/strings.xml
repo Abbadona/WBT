@@ -27,14 +27,11 @@
     <string name="log_in">Zaloguj</string>
     <string name="go_next_hint">Aby przejść dalej, przesuń ekran w prawo</string>
     <string name="go_back_next_hint">Przesuń ekran w lewo, aby wrócić lub w prawo, aby iść dalej</string>
-    <string name="go_back_hint">Aby wrócić, przesuń ekran w prawo</string>
+    <string name="go_back_hint">Aby wrócić, przesuń ekran w lewo</string>
     <string name="remember_signin">Zaloguj automatycznie</string>
     <string name="invate_to_register">Zapraszamy do rejestracji</string>
     <string name="survey_fill">Zapraszamy do wypłenienia ankiety</string>
-    <string name="advancement_level">Doświadczenie</string>
-    <string name="beginner">Początkujący</string>
-    <string name="medium_level">Średnio zaawansowany</string>
-    <string name="advance_level">Zaawansowany</string>
+    <string name="advancement_level">Poziom</string>
     <string name="training_level">Częstotliwość treningów</string>
     <string name="retry_password">Powtórz hasło</string>
     <string name="once_twice">1-2 tygodniowo</string>
@@ -53,4 +50,18 @@
     <string name="weight">Waga</string>
     <string name="height">Wzrost</string>
     <string name="thank_for_fill">za wypełnienie ankiety i rejestrację</string>
+    <string name="dane_kontaktowe">Dane kontaktowe</string>
+    <string name="email_address">Adres e-mail</string>
+    <string name="verify_method">Sposób weryfikacji:</string>
+    <string name="email_verification">e-mail</string>
+    <string name="phone_verification">SMS</string>
+    <string name="empty_text"> </string>
+    <string name="your_level">Jaki jest Twój poziom?</string>
+    <string name="basic">Podstawowy</string>
+    <string name="intermediate">Średnio zaawansowany</string>
+    <string name="advanced">Zaawansowany</string>
+    <string name="your_goal">Jaki jest Twój cel?</string>
+    <string name="strength">Siła</string>
+    <string name="stamina">Wytrzymałość</string>
+    <string name="reduction">Redukcja</string>
 </resources>
