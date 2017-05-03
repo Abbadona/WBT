@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.example.karol.wbt.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -88,5 +89,15 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public void cleanPreferences(){
+        preferencesEditor.clear();
+        preferencesEditor.commit();
+
+    }
+    @Override
+    public void onBackPressed() {
+        //Ta klasa ma być pusta aby nie móc się cofnąć!
     }
 }
