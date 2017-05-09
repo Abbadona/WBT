@@ -46,6 +46,15 @@ public class  SplashActivity extends AppCompatActivity {
                         }catch (Exception e){
 
                         }
+                        //// TODO: 09.05.2017
+                        //
+                        //      Dodałem poniższy kod - jeżeli nie chcesz się ponownie się rejestrować
+                        //          odkomentuj!
+                        //
+                        /*SharedPreferences.Editor preferencesEditor = preferences.edit();
+                        preferencesEditor.putBoolean(PREFERENCES_IS_LOGGED,true);*/
+
+
                         Log.d("TAG_ANIM_BOUNDLE",isLogged+"");
                         if (isLogged){
                             intent = new Intent(SplashActivity.this,MenuActivity.class);
