@@ -43,14 +43,7 @@ public class FrequencySurvey extends MySurveyPageActivity{
             optSevenMore.setChecked(true);
     }
 
-    public boolean onTouchEvent(MotionEvent event){
-        int selectedId = options.getCheckedRadioButtonId();
-        if(selectedId != -1){
-            RadioButton selectedButton = (RadioButton)findViewById(selectedId);
-            String selectedOption = selectedButton.getText().toString();
-            addSingleString("frequency", selectedOption);
-            return super.onTouchEvent(event);
-        }
-        return false;
+    public boolean onTouchEvent(MotionEvent event) {
+        return addChoice(options.getCheckedRadioButtonId(), "frequency") && super.onTouchEvent(event);
     }
 }

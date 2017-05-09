@@ -40,13 +40,6 @@ public class GoalSurvey extends MySurveyPageActivity{
     }
 
     public boolean onTouchEvent(MotionEvent event){
-        int selectedId = options.getCheckedRadioButtonId();
-        if(selectedId != -1){
-            RadioButton selectedButton = (RadioButton)findViewById(selectedId);
-            String selectedOption = selectedButton.getText().toString();
-            addSingleString("goal", selectedOption);
-            return super.onTouchEvent(event);
-        }
-        return false;
+        return addChoice(options.getCheckedRadioButtonId(), "goal") && super.onTouchEvent(event);
     }
 }
