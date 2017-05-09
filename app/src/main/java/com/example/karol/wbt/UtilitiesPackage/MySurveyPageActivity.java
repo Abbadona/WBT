@@ -76,6 +76,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
         }
         return super.onTouchEvent(event);
     }
+
     protected void addSingleString(String key, String value){
         preferencesEditor.putString(key, value).apply();
         preferencesEditor.commit();
@@ -84,6 +85,17 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     protected String loadSingleString(String key){
         return preferences.getString(key, "");
     }
+
+    public boolean addChoice(int selectedId, String type){
+        if(selectedId != -1){
+            RadioButton selectedButton = (RadioButton)findViewById(selectedId);
+            String selectedOption = selectedButton.getText().toString();
+            addSingleString(type, selectedOption);
+            return true;
+        }
+        return false;
+    }
+
     protected boolean isEditTextFilled(EditText editText){
         if (editText.getText().toString().trim().equals("")){
             editText.setError("Wypełnij pole");
