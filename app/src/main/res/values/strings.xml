@@ -1,4 +1,8 @@
 <resources>
+    <string name="create_plan">Stwórz plan</string>
+    <string name="show_plan">Pokaż plan</string>
+    <string name="future_option">Nie wiem</string>
+    <string name="options">Opcje</string>
     <string name="app_name">WBT</string>
     <string name="password">Hasło</string>
     <string name="hello">Witamy!</string>

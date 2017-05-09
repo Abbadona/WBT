@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.karol.wbt.MenuActivity">
+    android:background="@drawable/background"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="229dp"
+            android:layout_height="216dp"
+            app:srcCompat="@drawable/boarandtitle"
+            android:layout_weight="0.31" />
+
+        <Button
+            android:id="@+id/show_plan_button"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/show_plan" />
+
+        <Button
+            android:id="@+id/create_plan_button"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/create_plan" />
+
+        <Button
+            android:id="@+id/unknown_button"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/future_option" />
+
+        <Button
+            android:id="@+id/option_button"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/options" />
+    </LinearLayout>
+</LinearLayout>
