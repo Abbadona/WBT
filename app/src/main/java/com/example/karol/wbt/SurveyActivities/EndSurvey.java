@@ -46,6 +46,11 @@ public class EndSurvey extends AppCompatActivity implements View.OnClickListener
         if (v.getId() == endButton.getId()){
             sendPreferencesToServer();
             clearPreferences();
+            preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
+            preferencesEditor = preferences.edit();
+            preferencesEditor.putBoolean("islogged",true);
+            preferencesEditor.apply();
+            preferencesEditor.commit();
             startActivity(new Intent(new Intent(this, MenuActivity.class)));
             finish();
         }

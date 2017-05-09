@@ -11,7 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-public class SplashActivity extends AppCompatActivity {
+public class  SplashActivity extends AppCompatActivity {
 
     private static final String PREFERENCES_NAME = "myPreferences";
     private static final String PREFERENCES_IS_LOGGED= "islogged";
@@ -41,11 +41,11 @@ public class SplashActivity extends AppCompatActivity {
                         //Wczytyujemy ustawienia - czy użytkownik jest zalogowany
                         boolean isLogged = false;
                         Intent intent;
-                        /*try{
-                            isLogged = preferences.getBoolean("islogged",false);
+                        try{
+                            isLogged = preferences.getBoolean(PREFERENCES_IS_LOGGED,false);
                         }catch (Exception e){
 
-                        }*/
+                        }
                         Log.d("TAG_ANIM_BOUNDLE",isLogged+"");
                         if (isLogged){
                             intent = new Intent(SplashActivity.this,MenuActivity.class);
@@ -57,7 +57,6 @@ public class SplashActivity extends AppCompatActivity {
                         SplashActivity.this.finish();
                         overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
                     }},2000);
-
             }
 
             @Override
