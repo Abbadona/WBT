@@ -68,7 +68,7 @@
     <string name="strength">Siła</string>
     <string name="stamina">Wytrzymałość</string>
     <string name="reduction">Redukcja</string>
-    <string name="email_error">Wpisz prowidłowy email</string>
+    <string name="email_error">Wpisz prawidłowy email</string>
     <string name="phone_error">Wpisz numer telefonu</string>
     <string name="registration_positive">Udało się zarejestrować</string>
     <string name="registration_negative">Nie udało się zarejestrować</string>
