@@ -51,6 +51,8 @@ public class  SplashActivity extends AppCompatActivity {
                         //      Dodałem poniższy kod - jeżeli nie chcesz się ponownie się rejestrować
                         //          odkomentuj!
                         //
+
+
                         /*SharedPreferences.Editor preferencesEditor = preferences.edit();
                         preferencesEditor.putBoolean(PREFERENCES_IS_LOGGED,true);*/
 

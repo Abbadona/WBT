@@ -20,7 +20,7 @@ public class SignInUpActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(SignInUpActivity.this).create();
         alertDialog.setTitle("Połączenie");
         alertDialog.setMessage("Nie jesteś zalogowany z serwerem!");
-
+        alertDialog.setCancelable(false);
         //  Kod MAC urządzenia
         //WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         //WifiInfo info = manager.getConnectionInfo();

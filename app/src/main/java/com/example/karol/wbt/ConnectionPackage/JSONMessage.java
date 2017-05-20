@@ -9,10 +9,17 @@ import java.util.Map;
 
 public class JSONMessage {
 
+    static String jsonCreator( HashMap<String,String> parameters, String message_type){
+        //  Tak naprawdę to wystarczy, reszta to przepisy (tak jak przepis kucharski na json'a
+        //  bo wystarczy zamiast tworzyć Map<String,String>data można odrazu załadować
+        //  HashMap parameters
+        parameters.put("message_type",message_type);
+        return new JSONObject(parameters).toString();
+    }
+
     static String jsonLogin( HashMap<String,String> parameters ){
 
         Map<String,String> data = new LinkedHashMap<>();
-        parameters.get("login");
         data.put("message_type", "LoginRequest");
         data.put("login", parameters.get("login"));
         data.put("password", parameters.get("password"));
