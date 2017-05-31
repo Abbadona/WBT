@@ -41,7 +41,10 @@ public class ClientConnection {
         this.MessageType = messageType;
         this.parameters = parameters;
     }
-
+    public ClientConnection(InputStream keyin,String messageType){
+        this.keyin = keyin;
+        this.MessageType = messageType;
+    }
     public static boolean IsLogged(){
         return isLogged;
     }

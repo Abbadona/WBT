@@ -29,10 +29,6 @@
         </activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SurveyActivities.ThirdPageActivity" />
-        <activity android:name=".SurveyActivities.ZeroPageActivity" />
-        <activity android:name=".SurveyActivities.SecoundPageActivity" />
-        <activity android:name=".SurveyActivities.FirstPageActivity" />
         <activity android:name=".SurveyActivities.FrequencySurvey" />
         <activity android:name=".SurveyActivities.UserParametersSurvey" />
         <activity android:name=".SurveyActivities.SummarySurvey" />
@@ -42,7 +38,8 @@
         <activity android:name=".SurveyActivities.GoalSurvey" />
         <activity android:name=".ShowPlanActivity" />
         <activity android:name=".CreatePlanActivity" />
-        <activity android:name=".OptionActivity"></activity>
+        <activity android:name=".OptionActivity" />
+        <activity android:name=".UtilitiesPackage.InfoExerciseActivity"></activity>
     </application>
 
 </manifest>

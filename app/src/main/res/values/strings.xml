@@ -68,8 +68,36 @@
     <string name="strength">Siła</string>
     <string name="stamina">Wytrzymałość</string>
     <string name="reduction">Redukcja</string>
+    <string name="info_menu">Szczegóły</string>
+    <string name="change_exercises">Zamień ćwiczenie</string>
     <string name="email_error">Wpisz prawidłowy email</string>
     <string name="phone_error">Wpisz numer telefonu</string>
     <string name="registration_positive">Udało się zarejestrować</string>
     <string name="registration_negative">Nie udało się zarejestrować</string>
+    <string name="exc1_title">Leg Press</string>
+    <string name="exc2_title">Lats Extention</string>
+    <string name="exc3_title">Squats</string>
+    <string name="exc4_title">Bench Press</string>
+    <string name="exc5_title">Seated Cable Row</string>
+    <string name="exc6_title">Ab Crunch</string>
+    <string name="exc1_info">INFO ABOUT Leg Press</string>
+    <string name="exc2_info">INFO ABOUT Lats Extention</string>
+    <string name="exc3_info">INFO ABOUT Squats</string>
+    <string name="exc4_info">INFO ABOUT Bench Press</string>
+    <string name="exc5_info">INFO ABOUT Seated Cable Row</string>
+    <string name="exc6_info">Lie on your back with your knees bent and feet flat on the floor, hip-width apart.
+
+Place your hands behind your head so your thumbs are behind your ears.
+
+Don’t lace your fingers together.
+
+Hold your elbows out to the sides but rounded slightly in.
+
+Tilt your chin slightly, leaving a few inches of space between your chin and your chest.
+
+Gently pull your abdominals inward.
+
+Curl up and forward so that your head, neck, and shoulder blades lift off the floor.
+
+Hold for a moment at the top of the movement and then lower slowly back down.</string>
 </resources>

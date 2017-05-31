@@ -13,8 +13,8 @@ import android.widget.ImageView;
 
 public class  SplashActivity extends AppCompatActivity {
 
-    private static final String PREFERENCES_NAME = "myPreferences";
-    private static final String PREFERENCES_IS_LOGGED= "islogged";
+    private final String PREFERENCES_NAME = "myPreferences";
+    private final String PREFERENCES_IS_LOGGED= "islogged";
     private SharedPreferences preferences;
 
     @Override
@@ -39,6 +39,7 @@ public class  SplashActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Wczytyujemy ustawienia - czy użytkownik jest zalogowany
+
                         boolean isLogged = false;
                         Intent intent;
                         try{
@@ -46,24 +47,20 @@ public class  SplashActivity extends AppCompatActivity {
                         }catch (Exception e){
 
                         }
-                        //// TODO: 09.05.2017
-                        //
-                        //      Dodałem poniższy kod - jeżeli nie chcesz się ponownie się rejestrować
-                        //          odkomentuj!
-                        //
-
-
-                        /*SharedPreferences.Editor preferencesEditor = preferences.edit();
-                        preferencesEditor.putBoolean(PREFERENCES_IS_LOGGED,true);*/
-
-
                         Log.d("TAG_ANIM_BOUNDLE",isLogged+"");
+                        //TODO
+                        //  Jeżeli chcesz się rejestrować się wykomentuj:
+                        // ***POCZATEK*****
+                            isLogged = true;
+                        // ****KONIEC******
+
                         if (isLogged){
                             intent = new Intent(SplashActivity.this,MenuActivity.class);
                         }
                         else {
                             intent = new Intent(SplashActivity.this,SignInUpActivity.class);
                         }
+
                         SplashActivity.this.startActivity(intent);
                         SplashActivity.this.finish();
                         overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
