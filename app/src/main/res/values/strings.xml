@@ -21,10 +21,10 @@
     <string name="cancel">Anuluj</string>
     <string name="first_name">Imię</string>
     <string name="last_name">Nazwisko</string>
-    <string name="pass_diffrent">Hasła się różnią</string>
+    <string name="pass_different">Hasła się różnią</string>
     <string name="email">Adres e-mail</string>
     <string name="phone_number">Numer telefonu</string>
-    <string name="sms_verify">Weryfikacja sms</string>
+    <string name="sms_verify">Weryfikacja SMS</string>
     <string name="registry">Rejestruj</string>
     <string name="email_verify">Weryfickaja e-mail</string>
     <string name="verify_code">Wprowadź kod weryfikacjyjny</string>
@@ -70,7 +70,7 @@
     <string name="reduction">Redukcja</string>
     <string name="info_menu">Szczegóły</string>
     <string name="change_exercises">Zamień ćwiczenie</string>
-    <string name="email_error">Wpisz prawidłowy email</string>
+    <string name="email_error">Wpisz prawidłowy e-mail</string>
     <string name="phone_error">Wpisz numer telefonu</string>
     <string name="registration_positive">Udało się zarejestrować</string>
     <string name="registration_negative">Nie udało się zarejestrować</string>
@@ -100,4 +100,10 @@ Gently pull your abdominals inward.
 Curl up and forward so that your head, neck, and shoulder blades lift off the floor.
 
 Hold for a moment at the top of the movement and then lower slowly back down.</string>
+    <string name="change_password">Zmień hasło</string>
+    <string name="change_data">Edytuj dane</string>
+    <string name="old_password">Stare hasło</string>
+    <string name="new_password">Nowe hasło</string>
+    <string name="repeat_password">Powtórz hasło</string>
+    <string name="change">Zmień</string>
 </resources>

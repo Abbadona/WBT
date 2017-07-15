@@ -73,14 +73,14 @@ public class SignUpActivity extends MySurveyPageActivity {
         }
         return false;
     }
-    private boolean isPasswordsCorrects(EditText firstPass,EditText secoundPass){
+    private boolean isPasswordsCorrects(EditText firstPass,EditText secondPass){
         if ( addParameter(firstPass,"password",true)){
             String first = firstPass.getText().toString();
-            String secound = secoundPass.getText().toString();
-            if (first.equals(secound)){
+            String second = secondPass.getText().toString();
+            if (first.equals(second)){
                 return true;
             }else{
-                secoundPass.setError(getString(R.string.pass_diffrent));
+                secondPass.setError(getString(R.string.pass_different));
                 return false;
             }
         }
@@ -94,7 +94,7 @@ public class SignUpActivity extends MySurveyPageActivity {
             return false;
         }else{
             if ( !text.matches("^[a-zA-Z0-9]*$")){
-                editText.setError("Wpisz tylko cyfry i liczby");
+                editText.setError("Wpisz tylko litery i cyfry");
                 text = "";
                 return false;
             }else{

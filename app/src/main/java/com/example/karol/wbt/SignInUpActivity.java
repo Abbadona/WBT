@@ -30,7 +30,7 @@ public class SignInUpActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Logowanie", new DialogInterface.OnClickListener() {
 
             //
-            //  Kliknołeś w Zaloguj, więc wyświeetla się alertdialog związany z logowaniem
+            //  Kliknąłeś w Zaloguj, więc wyświetla się alertdialog związany z logowaniem
             //
 
             public void onClick(DialogInterface dialog, int which) {
@@ -45,7 +45,7 @@ public class SignInUpActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Rejestracja",new DialogInterface.OnClickListener() {
 
             //
-            //  Kliknołeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
+            //  Kliknąłeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
             //
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getBaseContext(), SignUpActivity.class);

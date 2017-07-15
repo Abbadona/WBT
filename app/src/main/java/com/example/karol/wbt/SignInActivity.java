@@ -71,27 +71,19 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 Log.d("TAG_SIGNINBUTT", "Button SignIn");
 
                 final HashMap<String, String> parameters = new HashMap<>();
-
                 final EditText loginEditText = (EditText) this.findViewById(R.id.login_in);
-
                 final EditText passEditText = (EditText) this.findViewById(R.id.password_in);
 
                 //Nasłuchiwanie na działanie
-
                 MyTextWatcher loginWatcher = new MyTextWatcher(loginEditText);
-
                 loginEditText.addTextChangedListener(loginWatcher);
 
                 MyTextWatcher passWatcher = new MyTextWatcher(passEditText);
-
                 passEditText.addTextChangedListener(passWatcher);
 
                 String password = passWatcher.getText();
-
                 String login = loginWatcher.getText();
-
                 InputStream keyin = this.getResources().openRawResource(R.raw.testkeysore);
-
                 final ClientConnection client = new ClientConnection(keyin, "LoginRequest", parameters);
 
                 if (!password.equals("") || !login.equals("")) {
