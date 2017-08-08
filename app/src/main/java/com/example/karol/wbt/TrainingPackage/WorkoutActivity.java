@@ -1,9 +1,11 @@
 package com.example.karol.wbt.TrainingPackage;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,9 @@ import android.widget.Toast;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.MenuActivity;
 import com.example.karol.wbt.R;
+import com.example.karol.wbt.SignInActivity;
+import com.example.karol.wbt.SignInUpActivity;
+import com.example.karol.wbt.SignUpActivity;
 import com.example.karol.wbt.UtilitiesPackage.InfoExerciseActivity;
 
 public class WorkoutActivity extends AppCompatActivity {
@@ -51,8 +56,35 @@ public class WorkoutActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,MenuActivity.class));
-        finish();
+        final AlertDialog alertDialog = new AlertDialog.Builder(WorkoutActivity.this).create();
+        alertDialog.setTitle("Trening");
+        alertDialog.setMessage("Czy chcesz zakończyć trening?");
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Wyjście", new DialogInterface.OnClickListener() {
+
+            //
+            //  Kliknąłeś w Zaloguj, więc wyświetla się alertdialog związany z logowaniem
+            //
+
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getBaseContext(),MenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Anuluj",new DialogInterface.OnClickListener() {
+
+            //
+            //  Kliknąłeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
+            //
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.cancel();
+            }
+
+        });
+        alertDialog.show();
+
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
