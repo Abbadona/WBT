@@ -1,4 +1,5 @@
 <resources>
+    <string name="workout">Trening</string>
     <string name="create_plan">Stwórz plan</string>
     <string name="show_plan">Pokaż plan</string>
     <string name="future_option">Nie wiem</string>

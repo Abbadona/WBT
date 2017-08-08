@@ -27,7 +27,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
 
     private String PREFERENCES_NAME = "survey_preferences";
     protected GestureDetectorCompat gestureObject;
-    protected float x1=0,x2=0;
+    private float x1=0,x2=0;
     protected SharedPreferences preferences;
     protected SharedPreferences.Editor preferencesEditor;
     @Override

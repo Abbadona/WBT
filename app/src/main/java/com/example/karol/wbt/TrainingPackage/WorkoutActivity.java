@@ -1,4 +1,4 @@
-package com.example.karol.wbt;
+package com.example.karol.wbt.TrainingPackage;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,9 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
+import com.example.karol.wbt.MenuActivity;
+import com.example.karol.wbt.R;
 import com.example.karol.wbt.UtilitiesPackage.InfoExerciseActivity;
 
-public class CreatePlanActivity extends AppCompatActivity {
+public class WorkoutActivity extends AppCompatActivity {
 
     private float x1=0,x2=0;
     private int siteCounter = 0,siteNumber = 5;
@@ -45,6 +47,7 @@ public class CreatePlanActivity extends AppCompatActivity {
         registerForContextMenu(exerciseImage);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
+        Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onBackPressed() {

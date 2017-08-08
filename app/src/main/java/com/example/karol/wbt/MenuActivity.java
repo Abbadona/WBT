@@ -6,11 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MenuActivity extends AppCompatActivity {
-    //
-    //Test push'a
-    //
+import com.example.karol.wbt.TrainingPackage.IntroductionTrainingActivity;
+import com.example.karol.wbt.TrainingPackage.WorkoutActivity;
 
+public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +25,8 @@ public class MenuActivity extends AppCompatActivity {
             case R.id.option_button:
                 intent = new Intent(this, OptionActivity.class);
                 break;
-            case R.id.create_plan_button:
-                intent = new Intent(this,CreatePlanActivity.class);
+            case R.id.training_button:
+                intent = new Intent(this,IntroductionTrainingActivity.class);
                 break;
             case R.id.unknown_button:
                 intent = null;

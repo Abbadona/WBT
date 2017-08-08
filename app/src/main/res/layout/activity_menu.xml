@@ -20,18 +20,18 @@
             android:layout_weight="0.31" />
 
         <Button
+            android:id="@+id/training_button"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/workout" />
+
+        <Button
             android:id="@+id/show_plan_button"
             android:layout_width="187dp"
             android:layout_height="wrap_content"
             android:onClick="onButtonClick"
             android:text="@string/show_plan" />
-
-        <Button
-            android:id="@+id/create_plan_button"
-            android:layout_width="187dp"
-            android:layout_height="wrap_content"
-            android:onClick="onButtonClick"
-            android:text="@string/create_plan" />
 
         <Button
             android:id="@+id/unknown_button"
