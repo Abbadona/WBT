@@ -19,27 +19,15 @@ public class JSONMessage {
 
     static String jsonLogin( HashMap<String,String> parameters ){
 
-        Map<String,String> data = new LinkedHashMap<>();
-        data.put("message_type", "LoginRequest");
-        data.put("login", parameters.get("login"));
-        data.put("password", parameters.get("password"));
-        data.put("device_id",parameters.get("device_id"));
-        return new JSONObject(data).toString();
+        parameters.put("message_type", "LoginRequest");
+        return new JSONObject(parameters).toString();
 
     }
 
     static String jsonRegister( HashMap<String,String> parameters  ){
 
-        Map<String,String> data = new LinkedHashMap<>();
-        data.put("message_type", "RegisterNewClient");
-        data.put("login", parameters.get("login"));
-        data.put("password", parameters.get("password"));
-        data.put("lastname", parameters.get("lastname"));
-        data.put("name", parameters.get("name"));
-        data.put("PHONE",parameters.get("PHONE"));
-        data.put("EMAIL",parameters.get("EMAIL"));
-        data.put("verify_way",parameters.get("verify_way"));
-        return new JSONObject(data).toString();
+        parameters.put("message_type", "RegisterNewClient");
+        return new JSONObject(parameters).toString();
 
     }
     static String jsonGetData(){
@@ -50,15 +38,13 @@ public class JSONMessage {
 
     }
     static String jsonAddDevice( HashMap<String,String> parameters  ){
+        parameters.put("message_type","AddDevice");
+        return new JSONObject(parameters).toString();
 
-        Map<String,String> data = new LinkedHashMap<>();
-        data.put("message_type","AddDevice");
-        data.put("login", parameters.get("login"));
-        data.put("password", parameters.get("password"));
-        data.put("device_id", parameters.get("device_id"));
-        data.put("verify_code",parameters.get("verify_code"));
-        return new JSONObject(data).toString();
-
+    }
+    static String jsonUpdateClientData( HashMap<String,String> parameters){
+        parameters.put("message_type","UpdateClientData");
+        return new JSONObject(parameters).toString();
     }
 }
 

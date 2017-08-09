@@ -51,7 +51,7 @@ public class  SplashActivity extends AppCompatActivity {
                         //TODO
                         //  Jeżeli chcesz się rejestrować się wykomentuj:
                         // ***POCZATEK*****
-                            isLogged = true;
+                        //    isLogged = true;
                         // ****KONIEC******
 
                         if (isLogged){

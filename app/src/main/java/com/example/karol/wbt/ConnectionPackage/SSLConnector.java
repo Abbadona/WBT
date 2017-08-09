@@ -1,5 +1,7 @@
 package com.example.karol.wbt.ConnectionPackage;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,21 +39,27 @@ public class SSLConnector {
             socketFactory.setHostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
             sslsocket = (SSLSocket)
-                    socketFactory.createSocket(new Socket("185.157.80.59",7632), "185.157.80.59", 7632, false);
+                    socketFactory.createSocket(new Socket("188.116.11.90",7632), "188.116.11.90", 7632, false);
 
             sslsocket.startHandshake();
 
         } catch (KeyStoreException e) {
+            Log.d("TAG_SSL_ERROR", "KeyStore");
             e.printStackTrace();
         } catch (CertificateException e) {
+            Log.d("TAG_SSL_ERROR", "CertificateException");
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
+            Log.d("TAG_SSL_ERROR", "NoSuchAlgorithmException");
             e.printStackTrace();
         } catch (IOException e) {
+            Log.d("TAG_SSL_ERROR", "IOException - startHandShake");
             e.printStackTrace();
         } catch (UnrecoverableKeyException e) {
+            Log.d("TAG_SSL_ERROR", "UnrecoverableKeyException");
             e.printStackTrace();
         } catch (KeyManagementException e) {
+            Log.d("TAG_SSL_ERROR", "KeyManagementException");
             e.printStackTrace();
         }
 
@@ -68,6 +76,9 @@ public class SSLConnector {
 
     }
     public void sendMessageToServer(String messageToSend) throws IOException {
+        if (sslsocket == null){
+            Log.d("TAG_SSLCONNECTION", "sslSocket się zesrał");
+        }
         PrintWriter pw = new PrintWriter(sslsocket.getOutputStream());
         pw.write(messageToSend);
         pw.write("\n");
@@ -82,6 +93,7 @@ public class SSLConnector {
         synchronized(SSLConnector.class){
             if(instance == null) {
                 instance = new SSLConnector(keyin);
+                Log.d("TAG_SSLCONNECTIO", "CreateNewSSLConn");
             }
             return instance;
         }

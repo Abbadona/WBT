@@ -45,6 +45,9 @@ public class ClientConnection {
         this.keyin = keyin;
         this.MessageType = messageType;
     }
+    public ClientConnection(InputStream keyin){
+        this.keyin = keyin;
+    }
     public static boolean IsLogged(){
         return isLogged;
     }
@@ -83,7 +86,8 @@ public class ClientConnection {
             try {
 
                 sslConnector = SSLConnector.getInstance(keyin);
-
+                if (sslConnector == null)
+                    Log.d("TAG_ClientConnection", "Zesrało się");
                 switch(MessageType){
 
                     case ("LoginRequest"):

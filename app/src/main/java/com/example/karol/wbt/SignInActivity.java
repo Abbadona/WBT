@@ -81,22 +81,22 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 MyTextWatcher passWatcher = new MyTextWatcher(passEditText);
                 passEditText.addTextChangedListener(passWatcher);
 
-                String password = passWatcher.getText();
-                String login = loginWatcher.getText();
+                String password = passEditText.getText().toString();
+                String login = loginEditText.getText().toString();
                 InputStream keyin = this.getResources().openRawResource(R.raw.testkeysore);
                 final ClientConnection client = new ClientConnection(keyin, "LoginRequest", parameters);
-
+                Log.d("TAG_SIGNINBUTT", password+" "+login);
                 if (!password.equals("") || !login.equals("")) {
-
+                    Log.d("TAG_SIGNINBUTT", "Inside");
                     parameters.put("login", login);
                     parameters.put("password", password);
 
 
-                    //String connectionResult = client.runConnection();
-                    //Usunąć! Próba bez połączenia!!
-                    String connectionResult = "LoginRequest";
+                    String connectionResult = client.runConnection();
 
-                    if (connectionResult.equals("LoginRequest") /*&& client.IsLogged()*/) {
+                    //String connectionResult = "LoginRequest";
+                    Log.d("TAG_SIGNINBUTT", connectionResult);
+                    if (connectionResult.equals("LoginRequest") && client.IsLogged()) {
 
                         Intent intent = new Intent(this, MenuActivity.class);
                         startActivity(intent);
@@ -142,6 +142,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                 }
                             });
                             alertVerifyDialog.show();
+                        }else{
+                            Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }//if ( !password.equals("") || !login.equals("") )
