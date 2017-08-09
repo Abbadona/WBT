@@ -81,8 +81,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 MyTextWatcher passWatcher = new MyTextWatcher(passEditText);
                 passEditText.addTextChangedListener(passWatcher);
 
-                String password = passEditText.getText().toString();
-                String login = loginEditText.getText().toString();
+                String password = passWatcher.getText();
+                String login = loginWatcher.getText();
                 InputStream keyin = this.getResources().openRawResource(R.raw.testkeysore);
                 final ClientConnection client = new ClientConnection(keyin, "LoginRequest", parameters);
                 Log.d("TAG_SIGNINBUTT", password+" "+login);

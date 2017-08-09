@@ -16,10 +16,12 @@ public class MyTextWatcher implements TextWatcher {
 
     public MyTextWatcher(EditText editText){
         this.myEditText = editText;
+        this.text = editText.getText().toString();
     }
 
     public void setEditText (EditText editText){
         this.myEditText = editText;
+        this.text = editText.getText().toString();
     }
 
     public void setPattern (String pattern){
