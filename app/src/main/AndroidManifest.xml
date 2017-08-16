@@ -39,7 +39,7 @@
         <activity android:name=".ShowPlanActivity" />
         <activity android:name=".TrainingPackage.WorkoutActivity" />
         <activity android:name=".OptionActivity" />
-        <activity android:name=".UtilitiesPackage.InfoExerciseActivity" />
+        <activity android:name=".TrainingPackage.InfoExerciseActivity" />
         <activity android:name=".ChangePasswordActivity"></activity>
         <activity android:name=".ChangeDataActivity"></activity>
         <activity android:name=".TrainingPackage.IntroductionTrainingActivity"></activity>

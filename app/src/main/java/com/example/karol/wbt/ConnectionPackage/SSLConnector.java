@@ -28,7 +28,7 @@ public class SSLConnector {
     private InputStream keyin;
     private KeyStore ks;
     private char[] keystorepass = "dzikidzik".toCharArray();
-
+    private String IP_NUMBER = "1.1.1.1";
     protected SSLConnector(InputStream keyin) {
 
         try {
@@ -39,7 +39,7 @@ public class SSLConnector {
             socketFactory.setHostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
             sslsocket = (SSLSocket)
-                    socketFactory.createSocket(new Socket("188.116.11.90",7632), "188.116.11.90", 7632, false);
+                    socketFactory.createSocket(new Socket(IP_NUMBER,7632), IP_NUMBER, 7632, false);
 
             sslsocket.startHandshake();
 

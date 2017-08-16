@@ -1,7 +1,10 @@
 package com.example.karol.wbt.ConnectionPackage;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.karol.wbt.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,17 +39,14 @@ public class ClientConnection {
     
 
     //KONSTRUKTOR
-    public ClientConnection(InputStream keyin, String messageType, HashMap<String,String> parameters){
-        this.keyin = keyin;
+    public ClientConnection(Context context, String messageType, HashMap<String,String> parameters){
+        this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
         this.MessageType = messageType;
         this.parameters = parameters;
     }
-    public ClientConnection(InputStream keyin,String messageType){
-        this.keyin = keyin;
+    public ClientConnection(Context context, String messageType){
         this.MessageType = messageType;
-    }
-    public ClientConnection(InputStream keyin){
-        this.keyin = keyin;
+        this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
     }
     public static boolean IsLogged(){
         return isLogged;
@@ -78,6 +78,7 @@ public class ClientConnection {
         this.isConnected = false;
         return this.runConnection();
     }
+
     private class ConnectionTask extends AsyncTask<Void,Void,Void> {
 
         @Override
@@ -87,7 +88,7 @@ public class ClientConnection {
 
                 sslConnector = SSLConnector.getInstance(keyin);
                 if (sslConnector == null)
-                    Log.d("TAG_ClientConnection", "Zesrało się");
+                    Log.d("TAG_ClientConnection", "ssl błąd");
                 switch(MessageType){
 
                     case ("LoginRequest"):
@@ -98,6 +99,12 @@ public class ClientConnection {
                         break;
                     case ("AddDevice"):
                         messageToSend = JSONMessage.jsonAddDevice(parameters);
+                        break;
+                    case("TrainingProposition"):
+                        messageToSend = JSONMessage.jsonProposition(parameters);
+                        break;
+                    case("GetTraining"):
+                        messageResult = JSONMessage.jsonGetTraining(parameters);
                         break;
                     default:
                         messageToSend = JSONMessage.jsonGetData();
@@ -122,7 +129,6 @@ public class ClientConnection {
                                 messageResult = "ERROR";
                             }
                         }
-
                         break;
                     case ("RegisterNewClient"):
                         isLogged = false;
@@ -139,16 +145,20 @@ public class ClientConnection {
                             isLogged = false;
                         }
                         break;
+                    case("TrainingProposition"):
+                        messageResult = JSONanswer.toString();
+                        break;
                     case("GetBasicData"):
                         messageResult = "GetBasicData";
+                        break;
+                    case("GetTraining"):
+                        messageResult = JSONanswer.toString();
                         break;
                     default://Mamy Error!
                         isLogged = false;
                         messageResult ="ERRORDEFAULT";
                         break;
                 }
-
-                //Zwalniamy semafor, możemy przejść dalej
                 isConnected = true;
 
             } catch (JSONException e) {

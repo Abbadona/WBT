@@ -18,15 +18,15 @@
         android:textColor="@android:color/background_light"
         android:textSize="36sp" />
 
-    <ImageView
-        android:id="@+id/exercise_imageView"
+    <VideoView
+        android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|center"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@android:color/background_light" />
+        android:layout_marginTop="50dp" />
+
 
 </LinearLayout>

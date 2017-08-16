@@ -46,5 +46,13 @@ public class JSONMessage {
         parameters.put("message_type","UpdateClientData");
         return new JSONObject(parameters).toString();
     }
+    static String jsonProposition( HashMap<String,String> parameters){
+        parameters.put("message_type","TrainingProposition");
+        return new JSONObject(parameters).toString();
+    }
+    static String jsonGetTraining( HashMap<String,String> parameters){
+        parameters.put("message_type","GetTraining").toString();
+        return new JSONObject(parameters).toString();
+    }
 }
 

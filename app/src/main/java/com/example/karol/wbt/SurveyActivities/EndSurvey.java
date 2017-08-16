@@ -51,8 +51,7 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
         if (CZY_TO_JEST_WERSJA_TESTOWA == false){
 
             HashMap<String,String> parameters = loadStringPreferences(keyList);
-            InputStream keyin = getResources().openRawResource(R.raw.testkeysore);
-            ClientConnection clientConnection = new ClientConnection(keyin,"RegisterNewClient",parameters);
+            ClientConnection clientConnection = new ClientConnection(this,"RegisterNewClient",parameters);
             String result = clientConnection.runConnection();
             if ( result == "RegisterNewClient" ){
                 Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);

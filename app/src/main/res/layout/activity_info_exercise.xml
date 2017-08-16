@@ -5,6 +5,17 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/title_exer_textView"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center"
+        android:text=""
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/background_light"
+        android:textSize="36sp" />
+
+    <TextView
         android:id="@+id/info_exer_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

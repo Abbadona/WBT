@@ -75,8 +75,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
     public Intent sendPasswords(){ // TODO: do dokonczenia
-        InputStream keyin = getResources().openRawResource(R.raw.testkeysore);
-        ClientConnection clientConnection = new ClientConnection(keyin, "ChangePassword", passwords);
+        ClientConnection clientConnection = new ClientConnection(this, "ChangePassword", passwords);
         String result = clientConnection.runConnection();
 
         if(result.contains("true"))

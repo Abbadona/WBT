@@ -1,4 +1,4 @@
-package com.example.karol.wbt.UtilitiesPackage;
+package com.example.karol.wbt.TrainingPackage;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,20 +11,24 @@ import com.example.karol.wbt.R;
 
 public class InfoExerciseActivity extends AppCompatActivity {
 
-    private int counter = 0;
-    private TextView textView;
+    private TextView descTextView,titleTextView;
     private final String PREFERENCES_NAME = "myPreferences";
     private SharedPreferences preferences;
-    private int info_id[]={R.string.exc1_info,R.string.exc2_info,R.string.exc3_info,R.string.exc4_info,R.string.exc5_info,R.string.exc6_info,};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_exercise);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        textView = (TextView) findViewById(R.id.info_exer_textView);
-        counter = preferences.getInt("siteCounter",0);
-        textView.setText(getString(info_id[counter]));
+        descTextView = (TextView) findViewById(R.id.info_exer_textView);
+        titleTextView = (TextView) findViewById(R.id.title_exer_textView);
+        descTextView.setText(preferences.getString("description",getString(R.string.connection_error)));
+        titleTextView.setText(preferences.getString("title",getString(R.string.connection_error)));
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 
 }

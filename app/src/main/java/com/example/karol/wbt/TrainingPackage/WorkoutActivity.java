@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,46 +15,69 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.MenuActivity;
 import com.example.karol.wbt.R;
-import com.example.karol.wbt.SignInActivity;
-import com.example.karol.wbt.SignInUpActivity;
-import com.example.karol.wbt.SignUpActivity;
-import com.example.karol.wbt.UtilitiesPackage.InfoExerciseActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class WorkoutActivity extends AppCompatActivity {
 
     private float x1=0,x2=0;
     private int siteCounter = 0,siteNumber = 5;
-    private ImageView exerciseImage;
+    private VideoView videoView;
     private TextView exerciseTitle;
     private final String PREFERENCES_NAME = "myPreferences";
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    private ClientConnection connection;
-    private int image_id[]={
-            R.drawable.exc1,R.drawable.exc2,R.drawable.exc3,R.drawable.exc4,R.drawable.exc5,R.drawable.exc6};
-    private int title_id[]={
-            R.string.exc1_title,R.string.exc2_title,R.string.exc3_title,R.string.exc4_title,R.string.exc5_title,R.string.exc6_title
-    };
+    private JSONArray jsonArray;
+
+    private void saveTrainingToDatabase(){
+        //// TODO: 16.08.2017
+    }
+
+    private void getDataFromServer(String training_id){
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id",training_id);
+        ClientConnection clientConnection = new ClientConnection(this,"GetTraining",hashMap);
+        String result = clientConnection.runConnection();
+        try{
+            JSONObject jsonAns = new JSONObject(result);
+            jsonArray = jsonAns.getJSONArray("GetTraining");
+            siteNumber = jsonArray.length();
+            saveTrainingToDatabase();
+        }catch (Exception e){
+            jsonArray = null;
+            siteNumber = 0;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_plan);
-        exerciseImage = (ImageView) findViewById(R.id.exercise_imageView);
+        videoView = (VideoView) findViewById(R.id.videoView);
         exerciseTitle = (TextView) findViewById(R.id.exercise_title_textView);
-        connection = new ClientConnection(this.getResources().openRawResource(R.raw.testkeysore),"getTraining");
-        loadSide();
-        registerForContextMenu(exerciseImage);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
         Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
+        getDataFromServer(getIntent().getExtras().getString("training_id"));
+        loadSide();
+        registerForContextMenu(videoView);
+
     }
+
     @Override
     public void onBackPressed() {
         final AlertDialog alertDialog = new AlertDialog.Builder(WorkoutActivity.this).create();
@@ -86,6 +110,7 @@ public class WorkoutActivity extends AppCompatActivity {
         alertDialog.show();
 
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -113,6 +138,9 @@ public class WorkoutActivity extends AppCompatActivity {
                         Log.d("TAG_SLIDE", "left to right");
                     }
                 }
+                editor.putInt("siteCounter",siteCounter);
+                editor.apply();
+                editor.commit();
                 break;
         }
         return super.onTouchEvent(event);
@@ -130,21 +158,38 @@ public class WorkoutActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item){
 
         if(item.getTitle()==getString(R.string.info_menu)){
-
-            editor.putInt("siteCounter",siteCounter);
-            editor.apply();
-            editor.commit();
             startActivity(new Intent(this, InfoExerciseActivity.class));
         }
         else if(item.getTitle()== getString(R.string.change_exercises)){
-
+            //// TODO: 15.08.2017  
         }else{
             return false;
         }
         return true;
     }
+
     private void loadSide(){
-        exerciseImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(),image_id[siteCounter], null));
-        exerciseTitle.setText(getString(title_id[siteCounter]));
+        String title = "",link = " " ,description = " ";
+        try {
+            JSONObject jsonObject = jsonArray.getJSONObject(siteCounter);
+            title = jsonObject.getString("exercise_name");
+            link = jsonObject.getString("video_link");
+            description = jsonObject.getString("description");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            title = getString(R.string.connection_error);
+            description = title;
+            link = description;
+        } finally {
+            exerciseTitle.setText(title);
+            videoView.setVideoURI(Uri.parse(link));
+            videoView.setMediaController(new MediaController(this));
+            videoView.requestFocus();
+            videoView.start();
+            editor.putString("description",description);
+            editor.putString("title",title);
+            editor.apply();
+            editor.commit();
+        }
     }
 }
