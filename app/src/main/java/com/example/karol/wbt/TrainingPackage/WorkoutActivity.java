@@ -154,6 +154,7 @@ public class WorkoutActivity extends AppCompatActivity {
         menu.add(0, v.getId(), 0, getString(R.string.change_exercises));
 
     }
+
     @Override
     public boolean onContextItemSelected(MenuItem item){
 
@@ -161,7 +162,15 @@ public class WorkoutActivity extends AppCompatActivity {
             startActivity(new Intent(this, InfoExerciseActivity.class));
         }
         else if(item.getTitle()== getString(R.string.change_exercises)){
-            //// TODO: 15.08.2017  
+            HashMap<String,String> parameters = new HashMap<>();
+            try {
+                parameters.put("exercise_id",jsonArray.getJSONObject(siteCounter).getString("exercise_id"));
+                changeExerciseJSON(new JSONObject(new ClientConnection(this,"ChangeExercise",parameters).runConnection()));
+                loadSide();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(this,"Nie udało się zmienić ćwiczenia",Toast.LENGTH_SHORT).show();
+            }
         }else{
             return false;
         }
@@ -191,5 +200,12 @@ public class WorkoutActivity extends AppCompatActivity {
             editor.apply();
             editor.commit();
         }
+    }
+
+    private void changeExerciseJSON(JSONObject newExercise) throws JSONException {
+        jsonArray.getJSONObject(siteCounter).put("exercise_id",newExercise.getString("exercise_id"));
+        jsonArray.getJSONObject(siteCounter).put("description",newExercise.getString("description"));
+        jsonArray.getJSONObject(siteCounter).put("video_link ",newExercise.getString("video_link "));
+        jsonArray.getJSONObject(siteCounter).put("exercise_name",newExercise.getString("exercise_name"));
     }
 }

@@ -47,6 +47,7 @@ public class ClientConnection {
     public ClientConnection(Context context, String messageType){
         this.MessageType = messageType;
         this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
+        if ( this.parameters == null ) parameters = new HashMap<>();
     }
     public static boolean IsLogged(){
         return isLogged;
@@ -106,6 +107,9 @@ public class ClientConnection {
                     case("GetTraining"):
                         messageResult = JSONMessage.jsonGetTraining(parameters);
                         break;
+                    case("ChangeExercise"):
+                        messageResult = JSONMessage.jsonChangeExercise(parameters);
+                        break;
                     default:
                         messageToSend = JSONMessage.jsonGetData();
                         break;
@@ -152,6 +156,9 @@ public class ClientConnection {
                         messageResult = "GetBasicData";
                         break;
                     case("GetTraining"):
+                        messageResult = JSONanswer.toString();
+                        break;
+                    case("ChangeExercise"):
                         messageResult = JSONanswer.toString();
                         break;
                     default://Mamy Error!
