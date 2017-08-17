@@ -3,6 +3,7 @@ package com.example.karol.wbt.ConnectionPackage;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Pair;
 
 import com.example.karol.wbt.R;
 
@@ -43,6 +44,12 @@ public class ClientConnection {
         this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
         this.MessageType = messageType;
         this.parameters = parameters;
+    }
+    public ClientConnection(Context context,String messageType, String key, String value){
+        this.MessageType = messageType;
+        this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
+        if ( this.parameters == null ) parameters = new HashMap<>();
+        parameters.put(key,value);
     }
     public ClientConnection(Context context, String messageType){
         this.MessageType = messageType;
@@ -107,8 +114,11 @@ public class ClientConnection {
                     case("GetTraining"):
                         messageResult = JSONMessage.jsonGetTraining(parameters);
                         break;
-                    case("ChangeExercise"):
-                        messageResult = JSONMessage.jsonChangeExercise(parameters);
+                    case("ExerciseReplacement"):
+                        messageResult = JSONMessage.jsonExerciseReplacement(parameters);
+                        break;
+                    case("ShowExercise"):
+                        messageResult = JSONMessage.jsonShowExercise(parameters);
                         break;
                     default:
                         messageToSend = JSONMessage.jsonGetData();
@@ -158,7 +168,10 @@ public class ClientConnection {
                     case("GetTraining"):
                         messageResult = JSONanswer.toString();
                         break;
-                    case("ChangeExercise"):
+                    case("ExerciseReplacement"):
+                        messageResult = JSONanswer.toString();
+                        break;
+                    case("ShowExercise"):
                         messageResult = JSONanswer.toString();
                         break;
                     default://Mamy Error!

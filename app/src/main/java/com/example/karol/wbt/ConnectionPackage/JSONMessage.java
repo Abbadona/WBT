@@ -16,17 +16,19 @@ public class JSONMessage {
         parameters.put("message_type",message_type);
         return new JSONObject(parameters).toString();
     }
-    static String jsonChangeExercise(HashMap<String,String> parameters){
-        parameters.put("message_type","ChangeExercise");
+    static String jsonExerciseReplacement(HashMap<String,String> parameters){
+        parameters.put("message_type","ExerciseReplacement");
         return new JSONObject(parameters).toString();
     }
     static String jsonLogin( HashMap<String,String> parameters ){
 
         parameters.put("message_type", "LoginRequest");
         return new JSONObject(parameters).toString();
-
     }
-
+    static String jsonShowExercise (HashMap<String,String> parameters){
+        parameters.put("message_type", "ShowExercise");
+        return new JSONObject(parameters).toString();
+    }
     static String jsonRegister( HashMap<String,String> parameters  ){
 
         parameters.put("message_type", "RegisterNewClient");

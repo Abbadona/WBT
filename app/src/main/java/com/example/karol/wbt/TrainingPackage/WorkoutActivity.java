@@ -1,11 +1,10 @@
 package com.example.karol.wbt.TrainingPackage;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,20 +13,16 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.MenuActivity;
 import com.example.karol.wbt.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 
 public class WorkoutActivity extends AppCompatActivity {
@@ -40,7 +35,8 @@ public class WorkoutActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private JSONArray jsonArray;
-
+    private JSONArray replacementArray;
+    private JSONObject replacementExercise;
     private void saveTrainingToDatabase(){
         //// TODO: 16.08.2017
     }
@@ -152,7 +148,6 @@ public class WorkoutActivity extends AppCompatActivity {
         //menu.setHeaderTitle("Menu");
         menu.add(0, v.getId(), 0, getString(R.string.info_menu));
         menu.add(0, v.getId(), 0, getString(R.string.change_exercises));
-
     }
 
     @Override
@@ -162,10 +157,8 @@ public class WorkoutActivity extends AppCompatActivity {
             startActivity(new Intent(this, InfoExerciseActivity.class));
         }
         else if(item.getTitle()== getString(R.string.change_exercises)){
-            HashMap<String,String> parameters = new HashMap<>();
             try {
-                parameters.put("exercise_id",jsonArray.getJSONObject(siteCounter).getString("exercise_id"));
-                changeExerciseJSON(new JSONObject(new ClientConnection(this,"ChangeExercise",parameters).runConnection()));
+                ExerciseReplacementJSON();
                 loadSide();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -202,10 +195,42 @@ public class WorkoutActivity extends AppCompatActivity {
         }
     }
 
-    private void changeExerciseJSON(JSONObject newExercise) throws JSONException {
-        jsonArray.getJSONObject(siteCounter).put("exercise_id",newExercise.getString("exercise_id"));
-        jsonArray.getJSONObject(siteCounter).put("description",newExercise.getString("description"));
-        jsonArray.getJSONObject(siteCounter).put("video_link ",newExercise.getString("video_link "));
-        jsonArray.getJSONObject(siteCounter).put("exercise_name",newExercise.getString("exercise_name"));
+    private String[] getExercisesReplacement() throws JSONException {
+        HashMap<String,String> parameters = new HashMap<>();
+        parameters.put("exercise_id",jsonArray.getJSONObject(siteCounter).getString("exercise_id"));
+        parameters.put("id_replacment_group",jsonArray.getJSONObject(siteCounter).getString("id_replacment_group"));
+        JSONObject jsonAnswer = new JSONObject(new ClientConnection(this,"ExerciseReplacement",parameters).runConnection());
+        replacementArray = jsonAnswer.getJSONArray("ExerciseReplacement");
+        String[] array = new String[replacementArray.length()];
+        for ( int i = 0 ; i < replacementArray.length(); ++i){
+            array[i] = replacementArray.getJSONObject(i).getString("exercise_name");
+        }
+        return array;
     }
+
+    private void ExerciseReplacementJSON() throws JSONException {
+        //// TODO: 17.08.2017
+        String[] exercises = getExercisesReplacement();
+        AlertDialog.Builder builder = new AlertDialog.Builder(WorkoutActivity.this);
+        builder.setTitle(getString(R.string.replacement_exer))
+                .setItems(exercises,new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            replacementExercise = replacementArray.getJSONObject(which);
+                            Context context = WorkoutActivity.this;
+                            JSONObject newExercise = new JSONObject(new ClientConnection(context,"ShowExercise", "exercise_id ",
+                                    replacementExercise.getString("exercise_id ")).runConnection());
+                            jsonArray.getJSONObject(siteCounter).put("exercise_id",newExercise.getString("exercise_id"));
+                            jsonArray.getJSONObject(siteCounter).put("description",newExercise.getString("description"));
+                            jsonArray.getJSONObject(siteCounter).put("video_link ",newExercise.getString("video_link "));
+                            jsonArray.getJSONObject(siteCounter).put("exercise_name",newExercise.getString("exercise_name"));
+                            loadSide();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }});
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }
