@@ -7,6 +7,7 @@ import android.widget.EditText;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import org.json.JSONObject;
 import org.json.JSONException;
+import android.widget.Toast;
 
 public class ChangePasswordActivity extends AppCompatActivity{
     private EditText oldPassword;
@@ -29,11 +30,14 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
     public void onButtonClick(View v) throws JSONException{
+
         switch(v.getId()){
             case R.id.accept_button:
                 if(isOldPasswordCorrect(oldPassword) && isNewPasswordCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
                     JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", "new_password",
                                                                  newPassword.getText().toString())).runConnection());
+                    if(sendNewPassword.has("error"))
+                        Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
