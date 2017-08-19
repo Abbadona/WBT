@@ -11,6 +11,7 @@
 
     <TextView
         android:id="@+id/goal_title"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
@@ -18,24 +19,14 @@
         android:text="@string/your_goal"
         android:textColor="@android:color/background_light"
         android:textSize="40sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/advancement_choice"
         android:layout_width="wrap_content"
+        android:layout_marginTop="125dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/opt_strength"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/strength"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"
-            tools:ignore="SmallSp" />
 
         <RadioButton
             android:id="@+id/opt_stamina"
@@ -59,16 +50,29 @@
             android:textSize="20sp"
             tools:ignore="SmallSp" />
 
+        <RadioButton
+            android:id="@+id/opt_strength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/strength"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            tools:ignore="SmallSp" />
+
     </RadioGroup>
 
     <TextView
         android:id="@+id/moves_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="190dp"
+        android:gravity="bottom"
         android:text="@string/go_back_next_hint"
+        android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="14sp"
-        android:textAlignment="center"
-        tools:ignore="InefficientWeight"/>
+         />
 
 </LinearLayout>

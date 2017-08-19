@@ -28,7 +28,6 @@ import java.util.HashMap;
 public class EndSurvey extends MySurveyPageActivity implements View.OnClickListener {
 
     Button endButton;
-    boolean CZY_TO_JEST_WERSJA_TESTOWA = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,41 +36,34 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
         endButton = (Button) findViewById(R.id.end_button);
         endButton.setOnClickListener(this);
     }
-    private void clearPreferences(){
-        preferencesEditor.clear();
-        preferencesEditor.apply();
-        preferencesEditor.commit();
-    }
+
     private Intent sendPreferencesToServer(){
 
-
         ArrayList<String> keyList = new ArrayList<>();
-        Collections.addAll(keyList, "login", "password", "name", "last_name","phone","email",
-                "verify_way","age","height","weight","frequency","advancement_level","goal");
-        if (CZY_TO_JEST_WERSJA_TESTOWA == false){
+        /*Collections.addAll(keyList, "login", "password", "name", "last_name","phone","email",
+                "verify_way","age","height","weight","frequency","advancement_level","goal");*/
+        Collections.addAll(keyList,"login", "password", "name", "lastname","PHONE","EMAIL", "verify_way");
+        HashMap<String,String> parameters = loadStringPreferences(keyList);
+        ClientConnection clientConnection = new ClientConnection(this,"RegisterNewClient",parameters);
+        String result = clientConnection.runConnection();
 
-            HashMap<String,String> parameters = loadStringPreferences(keyList);
-            ClientConnection clientConnection = new ClientConnection(this,"RegisterNewClient",parameters);
-            String result = clientConnection.runConnection();
-            if ( result == "RegisterNewClient" ){
-                Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
-                clearPreferences();
-                preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
-                preferencesEditor = preferences.edit();
-                preferencesEditor.putBoolean("islogged",true);
-                preferencesEditor.apply();
-                preferencesEditor.commit();
-                return new Intent(this, MenuActivity.class);
-            }else {
-                Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG);
-                return new Intent(this, SignInUpActivity.class);
-            }
-        }else {
-            Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG);
+        if ( result == "RegisterNewClient" ){
+            Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
+            this.clearPreferences(keyList);
+            preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
+            preferencesEditor = preferences.edit();
+            preferencesEditor.putBoolean("islogged",true);
+            preferencesEditor.apply();
+            preferencesEditor.commit();
+            Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
+            return new Intent(this, MenuActivity.class);
+        }else
+            Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG); {
             return new Intent(this, SignInUpActivity.class);
         }
 
     }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == endButton.getId()){
@@ -80,6 +72,7 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
             finish();
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         return false;

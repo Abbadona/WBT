@@ -311,13 +311,14 @@
     <TextView
         android:id="@+id/move_textview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/blank_textview"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="bottom"
+        android:layout_marginBottom="10dp"
         android:text="@string/go_back_next_hint"
         android:textColor="@android:color/background_light"
-        tools:ignore="ObsoleteLayoutParam"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        tools:ignore="ObsoleteLayoutParam" />
 
 </RelativeLayout>

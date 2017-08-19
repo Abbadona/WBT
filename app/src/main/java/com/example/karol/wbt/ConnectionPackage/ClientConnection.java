@@ -175,6 +175,7 @@ public class ClientConnection {
                         messageResult = JSONanswer.toString();
                         break;
                     default://Mamy Error!
+                        Log.d("TAG_DEFAULT",JSONanswer.getString("message_type"));
                         isLogged = false;
                         messageResult ="ERRORDEFAULT";
                         break;

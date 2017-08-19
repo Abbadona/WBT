@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import android.widget.RadioButton;
 
@@ -30,12 +31,28 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     private float x1=0,x2=0;
     protected SharedPreferences preferences;
     protected SharedPreferences.Editor preferencesEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         preferencesEditor = preferences.edit();
     }
+
+    protected void clearPreferences(){
+        preferencesEditor.clear();
+        preferencesEditor.apply();
+        preferencesEditor.commit();
+    }
+
+    protected void clearPreferences(List<String> parameters){
+        preferencesEditor.clear();
+        for ( String  parameter : parameters )
+            preferencesEditor.putString(parameter," ");
+        preferencesEditor.apply();
+        preferencesEditor.commit();
+    }
+
     protected void addStringPreferences(HashMap<String,String> hashMap){
         Iterator it = hashMap.entrySet().iterator();
         while (it.hasNext()){
@@ -46,6 +63,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
         preferencesEditor.apply();
         preferencesEditor.commit();
     }
+
     protected HashMap<String,String> loadStringPreferences(ArrayList<String> parametersList){
         HashMap<String,String> data = new HashMap<>();
         for (String parameter:parametersList){
@@ -53,6 +71,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
         }
         return data;
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -104,11 +123,6 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
         return true;
     }
 
-    public void cleanPreferences(){
-        preferencesEditor.clear();
-        preferencesEditor.commit();
-
-    }
     @Override
     public void onBackPressed() {
         //Ta klasa ma być pusta aby nie móc się cofnąć!

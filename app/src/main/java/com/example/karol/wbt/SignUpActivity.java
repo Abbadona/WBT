@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends MySurveyPageActivity {
 
@@ -27,6 +28,7 @@ public class SignUpActivity extends MySurveyPageActivity {
     private EditText retryPassEditText;
     private EditText fNameEditText;
     private EditText lNameEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +46,17 @@ public class SignUpActivity extends MySurveyPageActivity {
     private void loadStatesOfEditText(){
         try {
             ArrayList<String> arrayList = new ArrayList<>();
-            Collections.addAll(arrayList, "login", "password", "name", "last_name");
+            Collections.addAll(arrayList, "login", "password", "name", "lastname");
             parameters = loadStringPreferences(arrayList);
             loginEditText.setText(parameters.get("login"));
             passEditText.setText(parameters.get("password"));
             fNameEditText.setText(parameters.get("name"));
-            lNameEditText.setText(parameters.get("last_name"));
+            lNameEditText.setText(parameters.get("lastname"));
         }catch (Exception ex){
 
         }
     }
+
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -65,7 +68,7 @@ public class SignUpActivity extends MySurveyPageActivity {
         addParameter(loginEditText,"login",true);
         addParameter(passEditText,"password",true);
         addParameter(fNameEditText,"name",false);
-        addParameter(lNameEditText,"last_name",false);
+        addParameter(lNameEditText,"lastname",false);
 
         if (isEditTextFilled(loginEditText) && isPasswordsCorrects(passEditText,retryPassEditText) && isEditTextFilled(fNameEditText) && isEditTextFilled(lNameEditText) ) {
             addStringPreferences(parameters);
@@ -73,7 +76,9 @@ public class SignUpActivity extends MySurveyPageActivity {
         }
         return false;
     }
+
     private boolean isPasswordsCorrects(EditText firstPass,EditText secondPass){
+
         if ( addParameter(firstPass,"password",true)){
             String first = firstPass.getText().toString();
             String second = secondPass.getText().toString();
@@ -87,12 +92,14 @@ public class SignUpActivity extends MySurveyPageActivity {
         return false;
     }
     public boolean addParameter( EditText editText, String type, boolean isRequired){
-
+        //// TODO: 18.08.2017
+        // Polskie znaki nie wchodzą!!
         String text = editText.getText().toString();
         if ( isRequired && text.trim().equals("")){
             editText.setError("Wpisz dane");
             return false;
         }else{
+            //
             if ( !text.matches("^[a-zA-Z0-9]*$")){
                 editText.setError("Wpisz tylko litery i cyfry");
                 text = "";

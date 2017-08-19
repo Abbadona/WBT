@@ -109,4 +109,5 @@ Hold for a moment at the top of the movement and then lower slowly back down.</s
     <string name="new_password">Nowe hasło</string>
     <string name="repeat_password">Powtórz hasło</string>
     <string name="change">Zmień</string>
+    <string name="close">Zamknij</string>
 </resources>

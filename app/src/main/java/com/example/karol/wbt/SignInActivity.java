@@ -1,5 +1,5 @@
 package com.example.karol.wbt;
-
+import android.provider.Settings.Secure;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +20,8 @@ import com.example.karol.wbt.UtilitiesPackage.MyTextWatcher;
 
 import java.io.InputStream;
 import java.util.HashMap;
+
+import static java.security.AccessController.getContext;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     private CheckBox remeberLogin;
@@ -90,10 +92,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d("TAG_SIGNINBUTT", "Inside");
                     parameters.put("login", login);
                     parameters.put("password", password);
-
-
+                    Log.d("TAG_Device_Id",Secure.getString(this.getContentResolver(),Secure.ANDROID_ID));
+                    parameters.put("device_id","123");
                     String connectionResult = client.runConnection();
-
                     //String connectionResult = "LoginRequest";
                     Log.d("TAG_SIGNINBUTT", connectionResult);
                     if (connectionResult.equals("LoginRequest") && client.IsLogged()) {

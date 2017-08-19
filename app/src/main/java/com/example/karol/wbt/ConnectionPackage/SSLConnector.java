@@ -28,7 +28,7 @@ public class SSLConnector {
     private InputStream keyin;
     private KeyStore ks;
     private char[] keystorepass = "dzikidzik".toCharArray();
-    private String IP_NUMBER = "1.1.1.1";
+    private String IP_NUMBER = "188.116.11.90";
     protected SSLConnector(InputStream keyin) {
 
         try {
@@ -76,9 +76,7 @@ public class SSLConnector {
 
     }
     public void sendMessageToServer(String messageToSend) throws IOException {
-        if (sslsocket == null){
-            Log.d("TAG_SSLCONNECTION", "sslSocket się zesrał");
-        }
+        Log.d("TAG_SendToServer",messageToSend);
         PrintWriter pw = new PrintWriter(sslsocket.getOutputStream());
         pw.write(messageToSend);
         pw.write("\n");
@@ -87,6 +85,7 @@ public class SSLConnector {
     public JSONObject getMessageFromServer() throws JSONException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(sslsocket.getInputStream()));
         String serverAnswer = br.readLine();
+        Log.d("TAG_GetFromServer",serverAnswer);
         return new JSONObject(serverAnswer);
     }
     public static SSLConnector getInstance(InputStream keyin)  {

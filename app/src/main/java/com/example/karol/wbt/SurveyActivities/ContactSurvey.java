@@ -39,11 +39,11 @@ public class ContactSurvey extends MySurveyPageActivity{
 
     private void loadSavedData(){
         ArrayList<String> data = new ArrayList<>();
-        Collections.addAll(data, "phone", "email", "verify_way");
+        Collections.addAll(data, "PHONE", "EMAIL", "verify_way");
         String savedOption = loadSingleString("verify_way");
         parameters = loadStringPreferences(data);
-        phone.setText(parameters.get("phone"));
-        email.setText(parameters.get("email"));
+        phone.setText(parameters.get("PHONE"));
+        email.setText(parameters.get("EMAIL"));
         if(optPhone.getText().equals(savedOption))
             optPhone.setChecked(true);
         else if(optMail.getText().equals(savedOption))
@@ -63,8 +63,8 @@ public class ContactSurvey extends MySurveyPageActivity{
     }
 
     public boolean onTouchEvent(MotionEvent event){
-        addParameter(phone, "phone");
-        addParameter(email, "email");
+        addParameter(phone, "PHONE");
+        addParameter(email, "EMAIL");
         int selectedId = options.getCheckedRadioButtonId();
 
         if(isEditTextFilled(phone) && selectedId != -1 &&

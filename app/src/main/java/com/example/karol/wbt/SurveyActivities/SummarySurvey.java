@@ -40,15 +40,15 @@ public class SummarySurvey extends MySurveyPageActivity {
 
     private void loadStatesOfTextView(){
         ArrayList<String> keyList = new ArrayList<>();
-        Collections.addAll(keyList, "login", "password", "name", "last_name","phone","email",
+        Collections.addAll(keyList, "login", "password", "name", "lastname","PHONE","EMAIL",
                 "verify_way","age","height","weight","frequency","advancement_level","goal");
         parameters = loadStringPreferences(keyList);
         login.setText(parameters.get("login"));
         password.setText(parameters.get("password"));
         name.setText(parameters.get("name"));
-        last_name.setText(parameters.get("last_name"));
-        phone.setText(parameters.get("phone"));
-        email.setText(parameters.get("email"));
+        last_name.setText(parameters.get("lastname"));
+        phone.setText(parameters.get("PHONE"));
+        email.setText(parameters.get("EMAIL"));
         verify_way.setText(parameters.get("verify_way"));
         age.setText(parameters.get("age"));
         height.setText(parameters.get("height"));
@@ -57,4 +57,5 @@ public class SummarySurvey extends MySurveyPageActivity {
         advancement_level.setText(parameters.get("advancement_level"));
         goal.setText(parameters.get("goal"));
     }
+
 }

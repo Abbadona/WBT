@@ -14,6 +14,7 @@
         android:id="@+id/advancement_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="cursive"
         android:gravity="center"
         android:text="@string/your_level"
@@ -23,6 +24,7 @@
 
     <RadioGroup
         android:id="@+id/advancement_choice"
+        android:layout_marginTop="125dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content">
@@ -65,11 +67,13 @@
     <TextView
         android:id="@+id/moves_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
         android:text="@string/go_back_next_hint"
+        android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="14sp"
-        android:textAlignment="center"
-        tools:ignore="InefficientWeight"/>
+        android:layout_marginBottom="10dp"
+        tools:ignore="InefficientWeight" />
 
 </LinearLayout>
