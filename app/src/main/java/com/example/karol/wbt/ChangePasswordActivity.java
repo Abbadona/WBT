@@ -4,16 +4,14 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
-import java.util.HashMap;
-import java.io.InputStream;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
-import android.widget.Toast;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 public class ChangePasswordActivity extends AppCompatActivity{
     private EditText oldPassword;
     private EditText newPassword;
     private EditText repeatedPassword;
-    private HashMap<String,String> passwords = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -22,7 +20,6 @@ public class ChangePasswordActivity extends AppCompatActivity{
         oldPassword = (EditText)this.findViewById(R.id.old_password_text);
         newPassword = (EditText)this.findViewById(R.id.new_password_text);
         repeatedPassword = (EditText)this.findViewById(R.id.repeat_password_text);
-        passwords = new HashMap<>();
     }
 
     @Override
@@ -31,13 +28,12 @@ public class ChangePasswordActivity extends AppCompatActivity{
         finish();
     }
 
-    public void onButtonClick(View v){
+    public void onButtonClick(View v) throws JSONException{
         switch(v.getId()){
             case R.id.accept_button:
-                if(!isEmpty(oldPassword) && isCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
-                    this.passwords.put("old_password", oldPassword.getText().toString());
-                    this.passwords.put("new_password", newPassword.getText().toString());
-                    //sendPasswords();
+                if(isOldPasswordCorrect(oldPassword) && isNewPasswordCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
+                    JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", "new_password",
+                                                                 newPassword.getText().toString())).runConnection());
                 }
                 break;
 
@@ -48,15 +44,17 @@ public class ChangePasswordActivity extends AppCompatActivity{
         }
     }
 
-    public boolean isEmpty(EditText password){
-        if(password.getText().toString().isEmpty()){
-            password.setError("Podaj hasło");
+    public boolean isOldPasswordCorrect(EditText oldPassword){
+        if(isEmpty(oldPassword))
+            return false;
+        if(!oldPassword.getText().toString().equals(getCurrentPassword())){
+            oldPassword.setError("Niepoprawne hasło");
             return false;
         }
         return true;
     }
 
-    public boolean isCorrect(EditText password){
+    public boolean isNewPasswordCorrect(EditText password){
         if(isEmpty(password))
             return false;
         else if(!password.getText().toString().matches("^[a-zA-Z0-9]*$")){
@@ -67,21 +65,29 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
     public boolean areTheSame(EditText firstPassword, EditText secondPassword){
-        if(firstPassword.getText().toString().equals(secondPassword.getText().toString()))
-            return true;
-        else
+        if(!firstPassword.getText().toString().equals(secondPassword.getText().toString())){
             secondPassword.setError(getString(R.string.pass_different));
-        return false;
+            return false;
+        }
+        return true;
     }
 
-    public Intent sendPasswords(){ // TODO: do dokonczenia
-        ClientConnection clientConnection = new ClientConnection(this, "ChangePassword", passwords);
-        String result = clientConnection.runConnection();
+    public boolean isEmpty(EditText password){
+        if(password.getText().toString().isEmpty()){
+            password.setError("Podaj hasło");
+            return false;
+        }
+        return true;
+    }
 
-        if(result.contains("true"))
-            Toast.makeText(this, "Zmieniono hasło", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_LONG).show();
-        return new Intent(this, OptionActivity.class);
+    public String getCurrentPassword(){
+        String password = "";
+        try{
+            JSONObject passwordRequest = new JSONObject((new ClientConnection(this, "GetPassword")).runConnection());
+            password = passwordRequest.getString("password");
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return password;
     }
 }
