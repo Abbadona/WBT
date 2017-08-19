@@ -115,7 +115,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             final HashMap<String, String> verifyParametrs = new HashMap<>();
                             verifyParametrs.put("login", parameters.get("login"));
                             verifyParametrs.put("password", parameters.get("password"));
-                            verifyParametrs.put("id_device", macAddress);
+                            verifyParametrs.put("device_id", macAddress);
 
 
                             alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
