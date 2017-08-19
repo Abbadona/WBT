@@ -50,18 +50,11 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
         if ( result == "RegisterNewClient" ){
             Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
             this.clearPreferences(keyList);
-            preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
-            preferencesEditor = preferences.edit();
-            preferencesEditor.putBoolean("islogged",true);
-            preferencesEditor.apply();
-            preferencesEditor.commit();
             Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
-            return new Intent(this, MenuActivity.class);
         }else
             Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG); {
-            return new Intent(this, SignInUpActivity.class);
         }
-
+        return new Intent(this, SignInUpActivity.class);
     }
 
     @Override
