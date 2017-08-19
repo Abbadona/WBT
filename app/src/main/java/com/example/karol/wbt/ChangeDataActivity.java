@@ -3,6 +3,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 
+import com.example.karol.wbt.ConnectionPackage.ClientConnection;
+
+import org.json.JSONObject;
+
 public class ChangeDataActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){

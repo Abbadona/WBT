@@ -64,10 +64,6 @@ public class SSLConnector {
         }
 
     }
-    public void closeConnection() throws IOException {
-        sslsocket.close();
-        instance = null;
-    }
     private void LoadKey(InputStream keyin) throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
 
         this.keyin = keyin;
@@ -82,11 +78,11 @@ public class SSLConnector {
         pw.write("\n");
         pw.flush();
     }
-    public JSONObject getMessageFromServer() throws JSONException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(sslsocket.getInputStream()));
-        String serverAnswer = br.readLine();
-        Log.d("TAG_GetFromServer",serverAnswer);
-        return new JSONObject(serverAnswer);
+    public String getMessageFromServer() throws IOException {
+
+        String messageToSend = new BufferedReader(new InputStreamReader(sslsocket.getInputStream())).readLine();
+        Log.d("TAG_MessageFromServer",messageToSend);
+        return messageToSend;
     }
     public static SSLConnector getInstance(InputStream keyin)  {
         synchronized(SSLConnector.class){

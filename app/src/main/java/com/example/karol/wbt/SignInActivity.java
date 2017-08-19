@@ -15,26 +15,25 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.UtilitiesPackage.MyTextWatcher;
-
-import java.io.InputStream;
+import org.json.JSONObject;
 import java.util.HashMap;
 
-import static java.security.AccessController.getContext;
-
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
+
     private CheckBox remeberLogin;
     private Button signInButton;
     private SharedPreferences.Editor preferencesEditor;
     private SharedPreferences preferences;
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getBaseContext(),SignInUpActivity.class);
         startActivity(intent);
         finish();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,65 +94,69 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     parameters.put("password", password);
                     Log.d("TAG_Device_Id",Secure.getString(this.getContentResolver(),Secure.ANDROID_ID));
                     parameters.put("device_id","123");
-                    String connectionResult = client.runConnection();
-                    //String connectionResult = "LoginRequest";
-                    Log.d("TAG_SIGNINBUTT", connectionResult);
-                    if (connectionResult.equals("LoginRequest") && client.IsLogged()) {
 
-                        Intent intent = new Intent(this, MenuActivity.class);
-                        startActivity(intent);
+                    try {
 
-                        Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
-
-                    } else {//error ok
-
-                        if (connectionResult.equals("enter verify code")) {
-
-                            final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
-                            String macAddress = "123";
-                            LayoutInflater inflaterVerify = LayoutInflater.from(getApplicationContext());
-                            alertVerifyDialog.setView(inflaterVerify.inflate(R.layout.verify_alert, null));
-                            final HashMap<String, String> verifyParametrs = new HashMap<>();
-                            verifyParametrs.put("login", parameters.get("login"));
-                            verifyParametrs.put("password", parameters.get("password"));
-                            verifyParametrs.put("device_id", macAddress);
-
-
-                            alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    EditText editTextVerify = (EditText) alertVerifyDialog.findViewById(R.id.verify_edit_text);
-                                    verifyParametrs.put("verify_code", editTextVerify.getText().toString());
-
-                                    String ans = client.verifyClient(verifyParametrs);
-
-                                    if (ans.equals("AddDevice")) {
-                                        Toast.makeText(SignInActivity.this, "Zalogowano", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(SignInActivity.this.getBaseContext(),MenuActivity.class));
-                                    } else {
-                                        startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
-                                        Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
-                                        );
-                                    }
-                                    finish();
-                                }
-                            });
-                            alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Anuluj", new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            });
-                            alertVerifyDialog.show();
-                        }else{
-                            Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
+                        JSONObject jsonObject = new JSONObject(client.runConnection());
+                        if( !jsonObject.getString("message_type").equals("LoginRequest")){
+                            Log.d("TAG_Login","ThrowExcep");
+                            throw new Exception("Error");
                         }
-                    }
-                }//if ( !password.equals("") || !login.equals("") )
-                break;
-        }//switch end
 
+                        if (jsonObject.getBoolean("islogged")) {
+
+                            Intent intent = new Intent(this, MenuActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
+
+                        } else {//error ok
+                                Log.d("TAG_Verify","Inside");
+                                final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
+                                String macAddress = "123";
+                                LayoutInflater inflaterVerify = LayoutInflater.from(getApplicationContext());
+                                alertVerifyDialog.setView(inflaterVerify.inflate(R.layout.verify_alert, null));
+                                final HashMap<String, String> verifyParametrs = new HashMap<>();
+                                verifyParametrs.put("login", parameters.get("login"));
+                                verifyParametrs.put("password", parameters.get("password"));
+                                verifyParametrs.put("device_id", macAddress);
+
+
+                                alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        EditText editTextVerify = (EditText) alertVerifyDialog.findViewById(R.id.verify_edit_text);
+                                        verifyParametrs.put("verify_code", editTextVerify.getText().toString());
+
+                                        try {
+                                            JSONObject answer = new JSONObject(client.verifyClient(verifyParametrs));
+                                            if (answer.getString("message_type").equals("AddDevice")) {
+                                                Toast.makeText(SignInActivity.this, "Zalogowano", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(SignInActivity.this.getBaseContext(),MenuActivity.class));
+                                            } else throw new Exception("Error");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                            startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
+                                            Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
+                                            );
+                                        }
+                                        finally {finish();}
+                                    }
+                                });
+                                alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Anuluj", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                alertVerifyDialog.show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+        }
     }
 }

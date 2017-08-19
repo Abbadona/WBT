@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,14 +49,17 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
         Collections.addAll(keyList,"login", "password", "name", "lastname","PHONE","EMAIL", "verify_way");
         HashMap<String,String> parameters = loadStringPreferences(keyList);
         ClientConnection clientConnection = new ClientConnection(this,"RegisterNewClient",parameters);
-        String result = clientConnection.runConnection();
-
-        if ( result == "RegisterNewClient" ){
-            Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
-            this.clearPreferences(keyList);
-            Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
-        }else
-            Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG); {
+        String result = null;
+        try {
+            result = new JSONObject(clientConnection.runConnection()).getString("message_type");
+            if ( result == "RegisterNewClient" ){
+                Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
+                this.clearPreferences(keyList);
+                Toast.makeText(this,getString(R.string.registration_positive),Toast.LENGTH_LONG);
+            }else throw new IOException("Error");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this,getString(R.string.registration_negative),Toast.LENGTH_LONG);
         }
         return new Intent(this, SignInUpActivity.class);
     }
