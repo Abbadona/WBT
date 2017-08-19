@@ -1,4 +1,5 @@
 package com.example.karol.wbt;
+import android.content.Context;
 import android.provider.Settings.Secure;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -129,8 +130,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                                     if (ans.equals("AddDevice")) {
                                         Toast.makeText(SignInActivity.this, "Zalogowano", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(SignInActivity.this.getBaseContext(),MenuActivity.class));
                                     } else {
-                                        Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
+                                        Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
+                                        );
                                     }
                                     finish();
                                 }

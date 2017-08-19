@@ -29,7 +29,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/verify_code"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/background_dark" />
         </TableRow>
 
     </TableLayout>
