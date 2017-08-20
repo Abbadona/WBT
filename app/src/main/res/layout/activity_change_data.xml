@@ -211,16 +211,6 @@
                 android:textAlignment="viewStart"/>
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textColor="@android:color/background_light"
-                android:textSize="23sp"
-                tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
-
-            <EditText
                 android:id="@+id/height_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,7 +230,7 @@
                 tools:ignore="RtlHardcoded"
                 android:textAlignment="viewStart"/>
 
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/frequency_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -248,9 +238,10 @@
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
+                android:textAlignment="viewStart"
+                android:spinnerMode="dialog"/>
 
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/advancement_level_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,9 +249,9 @@
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
+                android:spinnerMode="dialog"/>
 
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/goal_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -268,14 +259,13 @@
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
+                android:spinnerMode="dialog"/>
 
             <Button
                 android:text="@string/cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/cancel_button"/>
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

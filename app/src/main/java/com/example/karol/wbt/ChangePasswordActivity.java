@@ -30,7 +30,6 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
     public void onButtonClick(View v) throws JSONException{
-
         switch(v.getId()){
             case R.id.accept_button:
                 if(isOldPasswordCorrect(oldPassword) && isNewPasswordCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
