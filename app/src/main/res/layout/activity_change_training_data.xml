@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_change_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.karol.wbt.ChangeUserDataActivity"
+    android:orientation="vertical"
+    android:background="@drawable/greybackground"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/change_data_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/change_data"
+        android:textColor="@android:color/background_light"
+        android:textSize="50sp"
+        android:textStyle="bold|italic" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/age_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/age"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/height_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/height"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/weight_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/weight"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/frequency_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/frequency"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/advancement_level_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/advancement_level"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:id="@+id/goal_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right"
+                android:text="@string/goal"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <Button
+                android:text="@string/change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/accept_button"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/age_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <EditText
+                android:id="@+id/height_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <EditText
+                android:id="@+id/weight_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"/>
+
+            <Spinner
+                android:id="@+id/frequency_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"
+                android:spinnerMode="dialog"/>
+
+            <Spinner
+                android:id="@+id/advancement_level_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:spinnerMode="dialog"/>
+
+            <Spinner
+                android:id="@+id/goal_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:spinnerMode="dialog"/>
+
+            <Button
+                android:text="@string/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel_button"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
