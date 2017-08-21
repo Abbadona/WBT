@@ -8,6 +8,7 @@ import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import org.json.JSONObject;
 import org.json.JSONException;
 import android.widget.Toast;
+import java.util.HashMap;
 
 public class ChangePasswordActivity extends AppCompatActivity{
     private EditText oldPassword;
@@ -25,39 +26,33 @@ public class ChangePasswordActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(this, OptionActivity.class));
+        startActivity(new Intent(this, OptionsActivity.class));
         finish();
     }
 
     public void onButtonClick(View v) throws JSONException{
         switch(v.getId()){
             case R.id.accept_button:
-                if(isOldPasswordCorrect(oldPassword) && isNewPasswordCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
-                    JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", "new_password",
-                                                                 newPassword.getText().toString())).runConnection());
+                if(!isEmpty(oldPassword) && isCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
+                    HashMap<String, String> passwords = new HashMap<>();
+                    passwords.put("old_password", oldPassword.getText().toString());
+                    passwords.put("new_password", newPassword.getText().toString());
+
+                    JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", passwords))
+                                                 .runConnection());
                     if(sendNewPassword.has("error"))
                         Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.cancel_button:
-                startActivity(new Intent(this, OptionActivity.class));
+                startActivity(new Intent(this, OptionsActivity.class));
                 finish();
                 break;
         }
     }
 
-    public boolean isOldPasswordCorrect(EditText oldPassword){
-        if(isEmpty(oldPassword))
-            return false;
-        if(!oldPassword.getText().toString().equals(getCurrentPassword())){
-            oldPassword.setError("Niepoprawne hasło");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isNewPasswordCorrect(EditText password){
+    public boolean isCorrect(EditText password){
         if(isEmpty(password))
             return false;
         else if(!password.getText().toString().matches("^[a-zA-Z0-9]*$")){
@@ -81,16 +76,5 @@ public class ChangePasswordActivity extends AppCompatActivity{
             return false;
         }
         return true;
-    }
-
-    public String getCurrentPassword(){
-        String password = "";
-        try{
-            JSONObject passwordRequest = new JSONObject((new ClientConnection(this, "GetPassword")).runConnection());
-            password = passwordRequest.getString("password");
-        }catch(JSONException e){
-            e.printStackTrace();
-        }
-        return password;
     }
 }
