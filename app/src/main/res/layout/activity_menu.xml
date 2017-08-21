@@ -41,7 +41,7 @@
             android:text="@string/future_option" />
 
         <Button
-            android:id="@+id/option_button"
+            android:id="@+id/options_button"
             android:layout_width="187dp"
             android:layout_height="wrap_content"
             android:onClick="onButtonClick"

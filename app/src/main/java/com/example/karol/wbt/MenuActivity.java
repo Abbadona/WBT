@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.karol.wbt.TrainingPackage.IntroductionTrainingActivity;
-import com.example.karol.wbt.TrainingPackage.WorkoutActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -23,8 +22,8 @@ public class MenuActivity extends AppCompatActivity {
             case R.id.show_plan_button:
                 intent = new Intent(this,ShowPlanActivity.class);
                 break;
-            case R.id.option_button:
-                intent = new Intent(this, OptionActivity.class);
+            case R.id.options_button:
+                intent = new Intent(this, OptionsActivity.class);
                 break;
             case R.id.training_button:
                 intent = new Intent(this,IntroductionTrainingActivity.class);

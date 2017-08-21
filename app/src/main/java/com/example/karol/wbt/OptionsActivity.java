@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class OptionActivity extends AppCompatActivity {
+public class OptionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_option);
+        setContentView(R.layout.activity_options);
     }
 
     @Override
@@ -24,8 +24,13 @@ public class OptionActivity extends AppCompatActivity {
                 finish();
                 break;
 
-            case R.id.change_data_button:
-                startActivity(new Intent(this, ChangeDataActivity.class));
+            case R.id.change_user_data_button:
+                startActivity(new Intent(this, ChangeUserDataActivity.class));
+                finish();
+                break;
+
+            case R.id.change_training_data_button:
+                startActivity(new Intent(this, ChangeTrainingDataActivity.class));
                 finish();
                 break;
         }

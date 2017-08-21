@@ -32,10 +32,17 @@
                 android:onClick="onButtonClick" />
 
         <Button
-                android:text="@string/change_data"
+                android:text="@string/edit_personal_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/change_data_button"
+                android:id="@+id/change_user_data_button"
                 android:onClick="onButtonClick" />
+
+        <Button
+            android:text="@string/edit_training_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/change_training_data_button"
+            android:onClick="onButtonClick" />
     </LinearLayout>
 </LinearLayout>
