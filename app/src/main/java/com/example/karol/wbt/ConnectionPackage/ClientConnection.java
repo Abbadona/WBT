@@ -56,7 +56,7 @@ public class ClientConnection {
 
         new ConnectionTask().execute();
 
-        while ( !IsConnected() ){
+        while ( !this.isConnected ){
             //Czekamy aż się połączy! - czekamy aż falaga isConnected będzie zwrócona na true
         }
         return messageResult;
@@ -76,16 +76,13 @@ public class ClientConnection {
         protected Void doInBackground(Void... params) {
 
             try {
-
                 sslConnector = SSLConnector.getInstance(keyin);
                 sslConnector.sendMessageToServer(new JSONObject(parameters).toString());
                 messageResult = sslConnector.getMessageFromServer();
                 isConnected = true;
-
             }  catch (IOException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
     }

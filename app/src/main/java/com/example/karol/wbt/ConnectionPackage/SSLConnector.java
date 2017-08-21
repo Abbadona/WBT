@@ -29,6 +29,7 @@ public class SSLConnector {
     private KeyStore ks;
     private char[] keystorepass = "dzikidzik".toCharArray();
     private String IP_NUMBER = "188.116.11.90";
+
     protected SSLConnector(InputStream keyin) {
 
         try {
@@ -79,7 +80,6 @@ public class SSLConnector {
         pw.flush();
     }
     public String getMessageFromServer() throws IOException {
-
         String messageToSend = new BufferedReader(new InputStreamReader(sslsocket.getInputStream())).readLine();
         Log.d("TAG_MessageFromServer",messageToSend);
         return messageToSend;

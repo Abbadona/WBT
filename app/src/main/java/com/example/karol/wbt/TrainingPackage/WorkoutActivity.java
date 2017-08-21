@@ -41,23 +41,6 @@ public class WorkoutActivity extends AppCompatActivity {
         //// TODO: 16.08.2017
     }
 
-    private void getDataFromServer(String training_id){
-
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("id",training_id);
-        ClientConnection clientConnection = new ClientConnection(this,"GetTraining",hashMap);
-        String result = clientConnection.runConnection();
-        try{
-            JSONObject jsonAns = new JSONObject(result);
-            jsonArray = jsonAns.getJSONArray("GetTraining");
-            siteNumber = jsonArray.length();
-            saveTrainingToDatabase();
-        }catch (Exception e){
-            jsonArray = null;
-            siteNumber = 0;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -73,7 +56,22 @@ public class WorkoutActivity extends AppCompatActivity {
         registerForContextMenu(videoView);
 
     }
+    private void getDataFromServer(String training_id){
 
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("training_id",training_id);
+        try{
+            JSONObject jsonAns = new JSONObject( new ClientConnection(this,"GetTraining",hashMap).runConnection());
+            Log.d("TAG_RESULT",jsonAns.toString());
+            jsonArray = new JSONArray(jsonAns.getString("exercises"));
+            siteNumber = jsonArray.length();
+            saveTrainingToDatabase();
+        }catch (Exception e){
+            Log.d("TAG_WORKOUT","ERROR");
+            jsonArray = null;
+            siteNumber = 0;
+        }
+    }
     @Override
     public void onBackPressed() {
         final AlertDialog alertDialog = new AlertDialog.Builder(WorkoutActivity.this).create();
@@ -173,15 +171,17 @@ public class WorkoutActivity extends AppCompatActivity {
     private void loadSide(){
         String title = "",link = " " ,description = " ";
         try {
+            if (jsonArray == null)
+                Log.d("JSON_ERROR","EMPTY");
             JSONObject jsonObject = jsonArray.getJSONObject(siteCounter);
             title = jsonObject.getString("exercise_name");
             link = jsonObject.getString("video_link");
             description = jsonObject.getString("description");
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             title = getString(R.string.connection_error);
             description = title;
-            link = description;
+            link = "https://youtu.be/ELtpTBf-pMU";
         } finally {
             exerciseTitle.setText(title);
             videoView.setVideoURI(Uri.parse(link));

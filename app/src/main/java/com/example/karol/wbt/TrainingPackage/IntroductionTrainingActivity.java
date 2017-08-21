@@ -6,6 +6,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
@@ -55,22 +56,23 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
 
     private HashMap<String,String> getTrainingMap()  {
 
-        HashMap<String,String>  map = new HashMap<>();
-        ClientConnection clientConnection = new ClientConnection(this,"TrainingProposition");
-        String result = clientConnection.runConnection();
+        HashMap<String,String> map = new HashMap<>();
 
         try{
+            ClientConnection clientConnection = new ClientConnection(this,"TrainingProposition");
+            String result = clientConnection.runConnection();
             JSONObject jsonAns = new JSONObject(result);
-            JSONArray jsonArray = jsonAns.getJSONArray("TrainingProposition");
+            Log.d("INTR_JSONANS",jsonAns.toString());
+            JSONArray jsonArray = new JSONArray(jsonAns.getString("trainings"));
             for ( int i = 0 ; i < jsonArray.length(); ++i ){
                 JSONObject jsonTmp = jsonArray.getJSONObject(i);
-                map.put("training_"+order[i],jsonTmp.getString("id"));
+                map.put("training_"+order[i],jsonTmp.getString("trainind_id"));
                 map.put("description_"+order[i],jsonTmp.getString("description"));
             }
             if (map.size() == 0 ) throw new Exception("Error");
 
         }catch (Exception e){
-
+            e.printStackTrace();
             AlertDialog alertDialog = new AlertDialog.Builder(IntroductionTrainingActivity.this).create();
             alertDialog.setTitle("Połączenie");
             alertDialog.setMessage("Błąd połączenia lub wczytania danych!");
@@ -109,18 +111,17 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
         Intent intent = new Intent(this,WorkoutActivity.class);
         String training_id = "";
         if (view.getId() == R.id.title_1 || view.getId() == R.id.description_1) {
-            training_id = ((TextView) findViewById(R.id.description_1)).getText().toString();
+            training_id = ((TextView) findViewById(R.id.title_1)).getText().toString();
         } else {
             if (view.getId() == R.id.title_2 || view.getId() == R.id.description_2) {
-                training_id = ((TextView) findViewById(R.id.description_3)).getText().toString();
+                training_id = ((TextView) findViewById(R.id.title_2)).getText().toString();
             } else {
-                training_id = ((TextView) findViewById(R.id.description_3)).getText().toString();
+                training_id = ((TextView) findViewById(R.id.title_3)).getText().toString();
             }
         }
         intent.putExtra("training_id",training_id);
         startActivity(intent);
         finish();
-
     }
 
     @Override

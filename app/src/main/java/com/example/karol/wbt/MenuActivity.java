@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.karol.wbt.TrainingPackage.IntroductionTrainingActivity;
 import com.example.karol.wbt.TrainingPackage.WorkoutActivity;
@@ -29,13 +30,7 @@ public class MenuActivity extends AppCompatActivity {
                 intent = new Intent(this,IntroductionTrainingActivity.class);
                 break;
             case R.id.unknown_button:
-                intent = null;
-                try {
-                    final MediaPlayer mp = MediaPlayer.create(this, R.raw.openkey);
-                    mp.start();
-                }catch (Exception e ) {
-
-                }
+                Toast.makeText(this,"Wykup płatne DLC",Toast.LENGTH_SHORT).show();
                 break;
         }
         if (intent != null){
