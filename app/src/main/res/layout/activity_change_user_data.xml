@@ -25,17 +25,14 @@
         android:textSize="50sp"
         android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/name_label"
@@ -48,6 +45,22 @@
                 android:textAlignment="viewStart"
                 android:layout_height="30dp"/>
 
+            <EditText
+                android:id="@+id/name_edit"
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:textColor="@android:color/background_light"
+                android:textSize="23sp"
+                tools:ignore="RtlHardcoded"
+                android:textAlignment="viewStart"
+                android:layout_height="wrap_content"
+                android:maxLines="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/lastname_label"
                 android:layout_width="match_parent"
@@ -59,16 +72,21 @@
                 tools:ignore="RtlHardcoded"
                 android:textAlignment="viewStart"/>
 
-            <TextView
-                android:id="@+id/email_label"
+            <EditText
+                android:id="@+id/lastname_edit"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
                 android:gravity="right"
-                android:text="@string/email"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
+                android:textAlignment="viewStart"
+                android:layout_height="wrap_content"
+                android:maxLines="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/phone_label"
@@ -81,34 +99,28 @@
                 tools:ignore="RtlHardcoded"
                 android:textAlignment="viewStart"/>
 
-            <Button
-                android:text="@string/change"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/accept_button"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
             <EditText
-                android:id="@+id/name_edit"
+                android:id="@+id/phone_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="right"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
-
-            <EditText
-                android:id="@+id/lastname_edit"
-                android:layout_width="match_parent"
+                android:textAlignment="viewStart"
                 android:layout_height="wrap_content"
+                android:maxLines="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/email_label"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:gravity="right"
+                android:text="@string/email"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
@@ -117,28 +129,42 @@
             <EditText
                 android:id="@+id/email_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="right"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
-
-            <EditText
-                android:id="@+id/phone_edit"
-                android:layout_width="match_parent"
+                android:textAlignment="viewStart"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textColor="@android:color/background_light"
-                android:textSize="23sp"
-                tools:ignore="RtlHardcoded"
-                android:textAlignment="viewStart"/>
+                android:maxLines="1"/>
+        </TableRow>
 
-            <Button
-                android:text="@string/cancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/cancel_button"/>
-        </LinearLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <Button
+            android:text="@string/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/accept_button"
+            android:layout_weight="0.45"/>
+
+        <Button
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancel_button"
+            android:layout_weight="0.42"/>
     </LinearLayout>
+
 </LinearLayout>

@@ -57,7 +57,7 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
                     trainingData.put("goal", goal.getSelectedItem().toString());
 
                     JSONObject sendNewData = new JSONObject((new ClientConnection(this, "InsertParameters", trainingData)).runConnection());
-                    if(sendNewData.has("error"))
+                    if(sendNewData.getString("message_type").equals("Error"))
                         Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -71,7 +71,7 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
 
     public void getCurrentData(){
         try{
-            JSONObject dataRequest = new JSONObject((new ClientConnection(this, "getParameters")).runConnection());
+            JSONObject dataRequest = new JSONObject((new ClientConnection(this, "GetParameters")).runConnection());
             age.setText(dataRequest.getString("age"));
             height.setText(dataRequest.getString("height"));
             weight.setText(dataRequest.getString("weight"));
@@ -84,7 +84,7 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
     }
 
     public void setChoices(Spinner choiceList, String array[]){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, array);
         choiceList.setAdapter(adapter);
     }
 

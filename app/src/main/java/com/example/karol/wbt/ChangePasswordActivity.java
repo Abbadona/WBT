@@ -40,7 +40,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
 
                     JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", passwords))
                                                  .runConnection());
-                    if(sendNewPassword.has("error"))
+                    if(sendNewPassword.getString("message_type").equals("Error"))
                         Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
                 }
                 break;
