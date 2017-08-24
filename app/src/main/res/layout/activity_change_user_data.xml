@@ -105,10 +105,11 @@
                 android:gravity="right"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
-                tools:ignore="RtlHardcoded"
+                tools:ignore="RtlHardcoded,TextFields"
                 android:textAlignment="viewStart"
                 android:layout_height="wrap_content"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:inputType="number"/>
         </TableRow>
 
         <TableRow
