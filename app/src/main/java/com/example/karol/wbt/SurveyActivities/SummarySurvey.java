@@ -40,8 +40,9 @@ public class SummarySurvey extends MySurveyPageActivity {
 
     private void loadStatesOfTextView(){
         ArrayList<String> keyList = new ArrayList<>();
+        // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
         Collections.addAll(keyList, "login", "password", "name", "lastname","PHONE","EMAIL",
-                "verify_way","age","height","weight","frequency","advancement_level","goal");
+                "verify_way","age","height","weight","frequency","advancment_level","goal");
         parameters = loadStringPreferences(keyList);
         login.setText(parameters.get("login"));
         password.setText(parameters.get("password"));
@@ -53,8 +54,8 @@ public class SummarySurvey extends MySurveyPageActivity {
         age.setText(parameters.get("age"));
         height.setText(parameters.get("height"));
         weight.setText(parameters.get("weight"));
-        frequency.setText(parameters.get("frequency"));
-        advancement_level.setText(parameters.get("advancement_level"));
+        frequency.setText(parameters.get("frequency") +" tygodniowo");
+        advancement_level.setText(parameters.get("advancment_level")); // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
         goal.setText(parameters.get("goal"));
     }
 

@@ -36,6 +36,10 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
         setChoices(goal, goals);
 
         getCurrentData();
+        if(!isFilled(age)){
+            finish();
+            startActivity(getIntent());
+        }
     }
 
     @Override

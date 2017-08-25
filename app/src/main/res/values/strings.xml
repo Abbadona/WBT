@@ -41,11 +41,12 @@
     <string name="advancement_level">Poziom</string>
     <string name="training_level">Częstotliwość treningów</string>
     <string name="retry_password">Powtórz hasło</string>
-    <string name="once_twice">1-2 tygodniowo</string>
-    <string name="three_four">3-4 tygodniowo</string>
-    <string name="five_six">5-6 tygodniowo</string>
-    <string name="seven_or_more">7 lub więcej tygodniowo</string>
-    <string name="frequency">Liczba treningów</string>
+    <string name="once_twice">1-2</string>
+    <string name="three_four">3-4</string>
+    <string name="five_six">5-6</string>
+    <string name="seven_or_more">7 i więcej</string>
+    <string name="frequency">Liczba treningów tygodniowo</string>
+    <string name="shortened_frequency">Liczba treningów</string>
     <string name="title_activity_user_parameters_survey">UserParametersSurvey</string>
     <string name="summary">Podsumowanie</string>
     <string name="verification_way">Sposób weryfikacji</string>

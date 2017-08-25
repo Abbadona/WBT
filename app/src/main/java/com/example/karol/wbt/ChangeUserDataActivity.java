@@ -24,6 +24,10 @@ public class ChangeUserDataActivity extends AppCompatActivity{
         email = (EditText)findViewById(R.id.email_edit);
 
         getCurrentData();
+        if(!isFilled(name)){
+            finish();
+            startActivity(getIntent());
+        }
     }
 
     @Override

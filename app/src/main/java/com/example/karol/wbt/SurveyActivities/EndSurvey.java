@@ -42,11 +42,10 @@ public class EndSurvey extends MySurveyPageActivity implements View.OnClickListe
     }
 
     private Intent sendPreferencesToServer(){
-
         ArrayList<String> keyList = new ArrayList<>();
-        /*Collections.addAll(keyList, "login", "password", "name", "last_name","phone","email",
-                "verify_way","age","height","weight","frequency","advancement_level","goal");*/
-        Collections.addAll(keyList,"login", "password", "name", "lastname","PHONE","EMAIL", "verify_way");
+        // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
+        Collections.addAll(keyList, "login", "password", "name", "lastname","PHONE","EMAIL",
+                           "verify_way", "age","height","weight","frequency","advancment_level","goal");
         HashMap<String,String> parameters = loadStringPreferences(keyList);
         ClientConnection clientConnection = new ClientConnection(this,"RegisterNewClient",parameters);
         String result = null;

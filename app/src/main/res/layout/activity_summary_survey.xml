@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="@string/frequency"
+                android:text="@string/shortened_frequency"
                 android:textColor="@android:color/background_light"
                 android:textSize="23sp"
                 tools:ignore="RtlHardcoded"
