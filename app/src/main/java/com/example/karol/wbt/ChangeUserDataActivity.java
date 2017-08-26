@@ -24,6 +24,10 @@ public class ChangeUserDataActivity extends AppCompatActivity{
         email = (EditText)findViewById(R.id.email_edit);
 
         getCurrentData();
+        if(!isFilled(name)){
+            finish();
+            startActivity(getIntent());
+        }
     }
 
     @Override
@@ -43,7 +47,7 @@ public class ChangeUserDataActivity extends AppCompatActivity{
                     userData.put("email", email.getText().toString());
 
                     JSONObject sendNewData = new JSONObject((new ClientConnection(this, "ChangeData", userData)).runConnection());
-                    if(sendNewData.has("error"))
+                    if(sendNewData.getString("message_type").equals("Error"))
                         Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
                 }
                 break;

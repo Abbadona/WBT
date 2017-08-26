@@ -30,7 +30,7 @@ public class AdvancementLevelSurvey extends MySurveyPageActivity{
     }
 
     private void loadSavedOption(){
-        String savedText = loadSingleString("advancement_level");
+        String savedText = loadSingleString("advancment_level"); // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
         if(optBasic.getText().equals(savedText))
             optBasic.setChecked(true);
         else if(optIntermediate.getText().equals(savedText))
@@ -39,7 +39,7 @@ public class AdvancementLevelSurvey extends MySurveyPageActivity{
             optAdvanced.setChecked(true);
     }
 
-    public boolean onTouchEvent(MotionEvent event){
-        return addChoice(options.getCheckedRadioButtonId(), "advancement_level") && super.onTouchEvent(event);
+    public boolean onTouchEvent(MotionEvent event){ // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
+        return addChoice(options.getCheckedRadioButtonId(), "advancment_level") && super.onTouchEvent(event);
     }
 }
