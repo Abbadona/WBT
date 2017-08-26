@@ -33,25 +33,24 @@ public class ClientConnection {
 
     //KONSTRUKTOR
     public ClientConnection(Context context, String messageType, HashMap<String,String> parameters){
+        isConnected = false;
         this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
         this.parameters = parameters;
         this.parameters.put("message_type",messageType);
     }
     public ClientConnection(Context context,String messageType, String key, String value){
+        isConnected = false;
         this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
         if ( this.parameters == null ) parameters = new HashMap<>();
         this.parameters.put(key,value);
         this.parameters.put("message_type",messageType);
     }
     public ClientConnection(Context context, String messageType){
+        isConnected = false;
         this.keyin = context.getResources().openRawResource(R.raw.testkeysore);
         if ( this.parameters == null ) parameters = new HashMap<>();
         this.parameters.put("message_type",messageType);
     }
-    public static boolean IsConnected(){
-        return  isConnected;
-    }
-
     public String runConnection( ){
 
         new ConnectionTask().execute();

@@ -13,6 +13,8 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +22,23 @@ import android.widget.VideoView;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.MenuActivity;
 import com.example.karol.wbt.R;
+import com.example.karol.wbt.UtilitiesPackage.ConfigYouTube;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayer.PlayerStyle;
+import com.google.android.youtube.player.YouTubePlayerView;
+public class WorkoutActivity extends YouTubeBaseActivity implements
+        YouTubePlayer.OnInitializedListener {
 
-public class WorkoutActivity extends AppCompatActivity {
-
+    private static final int RECOVERY_DIALOG_REQUEST = 1;
+    private YouTubePlayerView youTubeView;
     private float x1=0,x2=0;
     private int siteCounter = 0,siteNumber = 5;
     private VideoView videoView;
@@ -41,26 +53,12 @@ public class WorkoutActivity extends AppCompatActivity {
         //// TODO: 16.08.2017
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_plan);
-        videoView = (VideoView) findViewById(R.id.videoView);
-        exerciseTitle = (TextView) findViewById(R.id.exercise_title_textView);
-        preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
-        editor = preferences.edit();
-        Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
-        getDataFromServer(getIntent().getExtras().getString("training_id"));
-        loadSide();
-        registerForContextMenu(videoView);
-
-    }
     private void getDataFromServer(String training_id){
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("training_id",training_id);
         try{
+
             JSONObject jsonAns = new JSONObject( new ClientConnection(this,"GetTraining",hashMap).runConnection());
             Log.d("TAG_RESULT",jsonAns.toString());
             jsonArray = new JSONArray(jsonAns.getString("exercises"));
@@ -72,6 +70,28 @@ public class WorkoutActivity extends AppCompatActivity {
             siteNumber = 0;
         }
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_plan);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(ConfigYouTube.DEVELOPER_KEY, this);
+        //videoView = (VideoView) findViewById(R.id.videoView);
+        exerciseTitle = (TextView) findViewById(R.id.exercise_title_textView);
+        preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
+        editor = preferences.edit();
+        Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
+        getDataFromServer(getIntent().getExtras().getString("training_id"));
+        loadSide();
+        registerForContextMenu(videoView);
+
+    }
+
     @Override
     public void onBackPressed() {
         final AlertDialog alertDialog = new AlertDialog.Builder(WorkoutActivity.this).create();
@@ -181,7 +201,7 @@ public class WorkoutActivity extends AppCompatActivity {
             e.printStackTrace();
             title = getString(R.string.connection_error);
             description = title;
-            link = "https://youtu.be/ELtpTBf-pMU";
+            link = description;
         } finally {
             exerciseTitle.setText(title);
             videoView.setVideoURI(Uri.parse(link));
@@ -233,4 +253,36 @@ public class WorkoutActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+        if (!wasRestored) {
+
+            // loadVideo() will auto play video
+            // Use cueVideo() method, if you don't want to play it automatically
+            player.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
+
+            // Hiding player controls
+            player.setPlayerStyle(PlayerStyle.CHROMELESS);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECOVERY_DIALOG_REQUEST) {
+            // Retry initialization if user performed a recovery action
+            getYouTubePlayerProvider().initialize(ConfigYouTube.DEVELOPER_KEY, this);
+        }
+    }
+    private YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return (YouTubePlayerView) findViewById(R.id.youtube_view);
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
+        } else {
+            String errorMessage = errorReason.toString();
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+        }
+    }
 }

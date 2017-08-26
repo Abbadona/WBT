@@ -30,7 +30,7 @@ public class OptionsActivity extends AppCompatActivity {
                 break;
 
             case R.id.change_training_data_button:
-                startActivity(new Intent(this, ChangeTrainingDataActivity.class));
+                startActivity(new Intent(this, ChangeUserDataActivity.class));
                 finish();
                 break;
         }
