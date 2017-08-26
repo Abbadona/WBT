@@ -15,7 +15,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -39,6 +38,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
 
     private static final int RECOVERY_DIALOG_REQUEST = 1;
     private YouTubePlayerView youTubeView;
+    private YouTubePlayer youTubePlayer;
     private float x1=0,x2=0;
     private int siteCounter = 0,siteNumber = 5;
     private VideoView videoView;
@@ -49,6 +49,8 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
     private JSONArray jsonArray;
     private JSONArray replacementArray;
     private JSONObject replacementExercise;
+    private TextView description_textView;
+
     private void saveTrainingToDatabase(){
         //// TODO: 16.08.2017
     }
@@ -75,20 +77,18 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_plan);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_create_plan);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(ConfigYouTube.DEVELOPER_KEY, this);
-        //videoView = (VideoView) findViewById(R.id.videoView);
         exerciseTitle = (TextView) findViewById(R.id.exercise_title_textView);
+        description_textView = (TextView) findViewById(R.id.description_textView);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
         Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
         getDataFromServer(getIntent().getExtras().getString("training_id"));
         loadSide();
-        registerForContextMenu(videoView);
+        //registerForContextMenu(videoView);
 
     }
 
@@ -139,7 +139,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
                     if (siteCounter < siteNumber){
                         this.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                         siteCounter++;
-                        Toast.makeText(this,"Counter:"+siteCounter,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this,"Counter:"+siteCounter,Toast.LENGTH_SHORT).show();
                         loadSide();
                         Log.d("TAG_SLIDE", "right to left");
                     }
@@ -191,23 +191,19 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
     private void loadSide(){
         String title = "",link = " " ,description = " ";
         try {
-            if (jsonArray == null)
-                Log.d("JSON_ERROR","EMPTY");
+            if (jsonArray == null) Log.d("JSON_ERROR","EMPTY");
             JSONObject jsonObject = jsonArray.getJSONObject(siteCounter);
             title = jsonObject.getString("exercise_name");
-            link = jsonObject.getString("video_link");
+            ConfigYouTube.YOUTUBE_VIDEO_CODE = jsonObject.getString("video_link").replace("https://www.youtube.com/watch?v=","");
             description = jsonObject.getString("description");
         } catch (Exception e) {
             e.printStackTrace();
             title = getString(R.string.connection_error);
-            description = title;
-            link = description;
         } finally {
+            youTubeView = null;
+            youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
             exerciseTitle.setText(title);
-            videoView.setVideoURI(Uri.parse(link));
-            videoView.setMediaController(new MediaController(this));
-            videoView.requestFocus();
-            videoView.start();
+            description_textView.setText(description);
             editor.putString("description",description);
             editor.putString("title",title);
             editor.apply();
@@ -255,16 +251,16 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
-        if (!wasRestored) {
-
+            this.youTubePlayer = player;
             // loadVideo() will auto play video
             // Use cueVideo() method, if you don't want to play it automatically
-            player.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
-
+            //this.youTubePlayer.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
+            Toast.makeText(this,ConfigYouTube.YOUTUBE_VIDEO_CODE,Toast.LENGTH_SHORT).show();
+            this.youTubePlayer.cueVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
             // Hiding player controls
-            player.setPlayerStyle(PlayerStyle.CHROMELESS);
-        }
+            this.youTubePlayer.setPlayerStyle(PlayerStyle.DEFAULT);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECOVERY_DIALOG_REQUEST) {
@@ -272,6 +268,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
             getYouTubePlayerProvider().initialize(ConfigYouTube.DEVELOPER_KEY, this);
         }
     }
+
     private YouTubePlayer.Provider getYouTubePlayerProvider() {
         return (YouTubePlayerView) findViewById(R.id.youtube_view);
     }

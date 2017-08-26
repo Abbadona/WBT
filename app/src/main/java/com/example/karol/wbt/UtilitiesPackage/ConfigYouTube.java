@@ -8,6 +8,6 @@ public class ConfigYouTube {
     public static final String DEVELOPER_KEY = "AIzaSyCpthKowzwGJybSQ7C_QakCKkW5iKsuhMs";
 
     // YouTube video id
-    public static final String YOUTUBE_VIDEO_CODE = "_oEA18Y8gM0";
+    public volatile static String YOUTUBE_VIDEO_CODE = "_oEA18Y8gM0";
     //lS-af9Q-zvQ
 }

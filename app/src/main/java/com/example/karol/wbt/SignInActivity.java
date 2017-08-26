@@ -110,6 +110,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
 
                         } else {//error ok
+
                                 Log.d("TAG_Verify","Inside");
                                 final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
                                 String macAddress = "123";
