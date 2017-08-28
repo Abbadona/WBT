@@ -9,11 +9,11 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import android.widget.Toast;
 import java.util.HashMap;
+import android.widget.Button;
 
-public class ChangePasswordActivity extends AppCompatActivity{
-    private EditText oldPassword;
-    private EditText newPassword;
-    private EditText repeatedPassword;
+public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener{
+    private EditText oldPassword, newPassword, repeatedPassword;
+    private Button accept, cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -22,6 +22,11 @@ public class ChangePasswordActivity extends AppCompatActivity{
         oldPassword = (EditText)this.findViewById(R.id.old_password_text);
         newPassword = (EditText)this.findViewById(R.id.new_password_text);
         repeatedPassword = (EditText)this.findViewById(R.id.repeat_password_text);
+        accept = (Button)findViewById(R.id.accept_button);
+        cancel = (Button)findViewById(R.id.cancel_button);
+
+        accept.setOnClickListener(this);
+        cancel.setOnClickListener(this);
     }
 
     @Override
@@ -30,18 +35,27 @@ public class ChangePasswordActivity extends AppCompatActivity{
         finish();
     }
 
-    public void onButtonClick(View v) throws JSONException{
+    @Override
+    public void onClick(View v){
         switch(v.getId()){
             case R.id.accept_button:
-                if(!isEmpty(oldPassword) && isCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
+                if(isFilled(oldPassword) && isCorrect(newPassword) && areTheSame(newPassword, repeatedPassword)){
                     HashMap<String, String> passwords = new HashMap<>();
                     passwords.put("old_password", oldPassword.getText().toString());
                     passwords.put("new_password", newPassword.getText().toString());
 
-                    JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", passwords))
-                                                 .runConnection());
-                    if(sendNewPassword.getString("message_type").equals("Error"))
-                        Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                    try{
+                        JSONObject sendNewPassword = new JSONObject((new ClientConnection(this, "ChangePassword", passwords))
+                                                     .runConnection());
+                        if(sendNewPassword.getString("message_type").equals("Error"))
+                            Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(this, "Zapisano zmiany", Toast.LENGTH_SHORT).show();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(this, OptionsActivity.class));
+                    finish();
                 }
                 break;
 
@@ -53,7 +67,7 @@ public class ChangePasswordActivity extends AppCompatActivity{
     }
 
     public boolean isCorrect(EditText password){
-        if(isEmpty(password))
+        if(!isFilled(password))
             return false;
         else if(!password.getText().toString().matches("^[a-zA-Z0-9]*$")){
             password.setError("Wpisz tylko litery i cyfry");
@@ -70,9 +84,9 @@ public class ChangePasswordActivity extends AppCompatActivity{
         return true;
     }
 
-    public boolean isEmpty(EditText password){
-        if(password.getText().toString().isEmpty()){
-            password.setError("Podaj hasło");
+    boolean isFilled(EditText editText){
+        if(editText.getText().toString().isEmpty()){
+            editText.setError("Wypełnij pole");
             return false;
         }
         return true;
