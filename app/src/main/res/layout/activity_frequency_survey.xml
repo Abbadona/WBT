@@ -78,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.20"
+        android:layout_marginBottom="10dp"
         android:gravity="bottom"
         android:text="@string/go_back_next_hint"
         android:textAlignment="center"

@@ -23,7 +23,6 @@
         <activity android:name=".SignInUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -39,11 +38,9 @@
         <activity android:name=".ShowPlanActivity"/>
         <activity android:name=".TrainingPackage.WorkoutActivity"/>
         <activity android:name=".OptionsActivity"/>
-        <activity android:name=".TrainingPackage.InfoExerciseActivity"/>
         <activity android:name=".ChangePasswordActivity"/>
         <activity android:name=".ChangeUserDataActivity"/>
         <activity android:name=".TrainingPackage.IntroductionTrainingActivity"/>
-        <activity android:name=".TrainingPackage.ExerciseReplacementActivity"/>
         <activity android:name=".ChangeTrainingDataActivity">
         </activity>
     </application>

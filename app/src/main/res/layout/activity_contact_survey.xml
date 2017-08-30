@@ -105,21 +105,14 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/space_of_beauty"
-        android:text="@string/empty_text"
-        android:textSize="30sp"
-        android:layout_weight="0.27" />
-
-    <TextView
         android:id="@+id/moves_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.00"
+        android:gravity="bottom"
         android:text="@string/go_back_next_hint"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_weight="0.25" />
 
 </LinearLayout>

@@ -1,4 +1,6 @@
 package com.example.karol.wbt;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.provider.Settings.Secure;
 import android.app.Activity;
@@ -24,8 +26,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private CheckBox remeberLogin;
     private Button signInButton;
-    private SharedPreferences.Editor preferencesEditor;
-    private SharedPreferences preferences;
+
+    private EditText loginEditText;
+    private EditText passEditText;
 
     @Override
     public void onBackPressed() {
@@ -39,14 +42,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
-        preferencesEditor = preferences.edit();
-
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(this);
 
         remeberLogin = (CheckBox)findViewById(R.id.remember_checkBox);
         remeberLogin.setOnClickListener(this);
+
 
     }
 
@@ -55,26 +56,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
 
-            //Przyciskamy Zaloguj
-            case R.id.remember_checkBox:
-
-                if (remeberLogin.isChecked()) {
-                    preferencesEditor.putString("rememberLogged", "true");
-
-                } else {
-                    preferencesEditor.putString("rememberLogged", "false");
-                }
-                preferencesEditor.commit();
-
-                break;
-
             case R.id.signInButton:
 
                 Log.d("TAG_SIGNINBUTT", "Button SignIn");
 
                 final HashMap<String, String> parameters = new HashMap<>();
-                final EditText loginEditText = (EditText) this.findViewById(R.id.login_in);
-                final EditText passEditText = (EditText) this.findViewById(R.id.password_in);
+                loginEditText= (EditText) this.findViewById(R.id.login_in);
+                passEditText = (EditText) this.findViewById(R.id.password_in);
 
                 //Nasłuchiwanie na działanie
                 MyTextWatcher loginWatcher = new MyTextWatcher(loginEditText);
@@ -94,7 +82,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     parameters.put("password", password);
                     Log.d("TAG_Device_Id",Secure.getString(this.getContentResolver(),Secure.ANDROID_ID));
                     parameters.put("device_id","123");
-
                     try {
 
                         JSONObject jsonObject = new JSONObject(client.runConnection());
@@ -104,12 +91,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
 
                         if (jsonObject.getBoolean("islogged")) {
-
+                            if (remeberLogin.isChecked()) rememberLogin();
                             Intent intent = new Intent(this, MenuActivity.class);
                             startActivity(intent);
                             Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
 
-                        } else {//error ok
+                        } else {
 
                                 Log.d("TAG_Verify","Inside");
                                 final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
@@ -121,7 +108,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                 verifyParametrs.put("password", parameters.get("password"));
                                 verifyParametrs.put("device_id", macAddress);
 
-
                                 alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -132,6 +118,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                         try {
                                             JSONObject answer = new JSONObject(client.verifyClient(verifyParametrs));
                                             if (answer.getString("message_type").equals("AddDevice")) {
+                                                if (remeberLogin.isChecked()) rememberLogin();
                                                 Toast.makeText(SignInActivity.this, "Zalogowano", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(SignInActivity.this.getBaseContext(),MenuActivity.class));
                                             } else throw new Exception("Error");
@@ -159,5 +146,20 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
         }
+    }
+
+    private void rememberLogin(){
+
+        SharedPreferences.Editor preferencesEditor;
+        SharedPreferences preferences;
+
+        preferences = getSharedPreferences("myPreferences", Activity.MODE_PRIVATE);
+        preferencesEditor = preferences.edit();
+
+        preferencesEditor.putBoolean("islogged",true);
+        preferencesEditor.putString("login",loginEditText.getText().toString());
+        preferencesEditor.putString("password",passEditText.getText().toString());
+        preferencesEditor.commit();
+
     }
 }

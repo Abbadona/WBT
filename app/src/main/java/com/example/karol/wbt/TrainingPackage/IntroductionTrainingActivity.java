@@ -42,7 +42,20 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
     }
 
     private void loadContent(){
-
+        //// TODO: 30.08.2017
+        /*  W getTrainingMap są propozycję treningów
+                    czyli id treningu oraz opis
+                    Parametry wyglądają następująco
+                    (training_1,"jakis numer")
+                    (training_2,"jakis numer2")
+                    ...
+                    (training_n,"jakis numer_n")
+                    (description_1,"jakis numer")
+                    (description_2,"jakis numer")
+                    ...
+                    (description_n,"jakis numer")
+                     training_1,description_1 trzeba zapisać w jednym wierszu
+         */
         HashMap<String,String> mapOfTraining = getTrainingMap();
         int i = 0;
         while (i < 3 ){
@@ -51,7 +64,9 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
             id_textView.setText(mapOfTraining.get("training_"+order[i]));
             desc_textView.setText(mapOfTraining.get("description_"+order[i]));
             i++;
+            //saveToDataBase();
         }
+        //saveToDataBase();
     }
 
     private HashMap<String,String> getTrainingMap()  {
@@ -122,6 +137,10 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
         intent.putExtra("training_id",training_id);
         startActivity(intent);
         finish();
+    }
+
+    private void saveToDataBase(){
+        //// TODO: 30.08.2017
     }
 
     @Override
