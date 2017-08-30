@@ -11,10 +11,12 @@ import org.json.JSONObject;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
-public class ChangeTrainingDataActivity extends AppCompatActivity{
+public class ChangeTrainingDataActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText age, height, weight;
     private Spinner frequency, advancementLevel, goal;
+    private Button accept, cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,15 +33,15 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
         frequency = (Spinner)findViewById(R.id.frequency_edit);
         advancementLevel = (Spinner)findViewById(R.id.advancement_level_edit);
         goal = (Spinner)findViewById(R.id.goal_edit);
+        accept = (Button)findViewById(R.id.accept_button);
+        cancel = (Button)findViewById(R.id.cancel_button);
+
         setChoices(frequency, frequencies);
         setChoices(advancementLevel, advancement_levels);
         setChoices(goal, goals);
-
+        accept.setOnClickListener(this);
+        cancel.setOnClickListener(this);
         getCurrentData();
-        if(!isFilled(age)){
-            finish();
-            startActivity(getIntent());
-        }
     }
 
     @Override
@@ -48,7 +50,8 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
         finish();
     }
 
-    public void onButtonClick(View v) throws JSONException{
+    @Override
+    public void onClick(View v){
         switch(v.getId()){
             case R.id.accept_button:
                 if(isFilled(age) && isFilled(height) && isFilled(weight)){
@@ -57,12 +60,20 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
                     trainingData.put("height", height.getText().toString());
                     trainingData.put("weight", weight.getText().toString());
                     trainingData.put("frequency", frequency.getSelectedItem().toString());
-                    trainingData.put("advancement_level", advancementLevel.getSelectedItem().toString());
+                    trainingData.put("advancment_level", advancementLevel.getSelectedItem().toString());  // TODO: poprawic literowke jak Mikolaj wprowadzi zmiany
                     trainingData.put("goal", goal.getSelectedItem().toString());
 
-                    JSONObject sendNewData = new JSONObject((new ClientConnection(this, "InsertParameters", trainingData)).runConnection());
-                    if(sendNewData.getString("message_type").equals("Error"))
-                        Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                    try{
+                        JSONObject sendNewData = new JSONObject((new ClientConnection(this, "InsertParameters", trainingData)).runConnection());
+                        if(sendNewData.getString("message_type").equals("Error"))
+                            Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(this, "Zapisano zmiany", Toast.LENGTH_SHORT).show();
+                    }catch(JSONException e){
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(this, OptionsActivity.class));
+                    finish();
                 }
                 break;
 
@@ -94,7 +105,12 @@ public class ChangeTrainingDataActivity extends AppCompatActivity{
 
     public void loadChoice(Spinner choiceList, String choice){
         ArrayAdapter adapter = (ArrayAdapter)choiceList.getAdapter();
-        choiceList.setSelection(adapter.getPosition(choice));
+        if(choice.contains("7"))
+            choiceList.setSelection(3);
+        else if(choice.contains("ednio") || choice.contains("Wytrz"))
+            choiceList.setSelection(1);
+        else
+            choiceList.setSelection(adapter.getPosition(choice));
     }
 
     boolean isFilled(EditText editText){

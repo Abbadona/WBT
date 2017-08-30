@@ -9,25 +9,26 @@ import org.json.JSONException;
 import android.view.View;
 import android.widget.Toast;
 import java.util.HashMap;
+import android.widget.Button;
 
-public class ChangeUserDataActivity extends AppCompatActivity{
+public class ChangeUserDataActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText name, lastName, phone, email;
+    private Button accept, cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_user_data);
-
         name = (EditText)findViewById(R.id.name_edit);
         lastName = (EditText)findViewById(R.id.lastname_edit);
         phone = (EditText)findViewById(R.id.phone_edit);
         email = (EditText)findViewById(R.id.email_edit);
+        accept = (Button)findViewById(R.id.accept_button);
+        cancel = (Button)findViewById(R.id.cancel_button);
 
+        accept.setOnClickListener(this);
+        cancel.setOnClickListener(this);
         getCurrentData();
-        if(!isFilled(name)){
-            finish();
-            startActivity(getIntent());
-        }
     }
 
     @Override
@@ -36,7 +37,8 @@ public class ChangeUserDataActivity extends AppCompatActivity{
         finish();
     }
 
-    public void onButtonClick(View v) throws JSONException{
+    @Override
+    public void onClick(View v){
         switch(v.getId()){
             case R.id.accept_button:
                 if(isFilled(name) && isFilled(lastName) && isFilled(phone) && isFilled(email)){
@@ -46,9 +48,17 @@ public class ChangeUserDataActivity extends AppCompatActivity{
                     userData.put("phone", phone.getText().toString());
                     userData.put("email", email.getText().toString());
 
-                    JSONObject sendNewData = new JSONObject((new ClientConnection(this, "ChangeData", userData)).runConnection());
-                    if(sendNewData.getString("message_type").equals("Error"))
-                        Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                    try{
+                        JSONObject sendNewData = new JSONObject((new ClientConnection(this, "ChangeData", userData)).runConnection());
+                        if(sendNewData.getString("message_type").equals("Error"))
+                            Toast.makeText(this, "Wystąpił błąd", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(this, "Zapisano zmiany", Toast.LENGTH_SHORT).show();
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(this, OptionsActivity.class));
+                    finish();
                 }
                 break;
 
