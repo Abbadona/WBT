@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.karol.wbt.TrainingPackage.DbOpenHelper;
 import com.example.karol.wbt.TrainingPackage.IntroductionTrainingActivity;
 
 public class MenuActivity extends AppCompatActivity {
+    DbOpenHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        database = new DbOpenHelper(this);
+        // database.getReadableDatabase();
+        // database.close();
     }
     public void onButtonClick(View v){
         Intent intent = null;
