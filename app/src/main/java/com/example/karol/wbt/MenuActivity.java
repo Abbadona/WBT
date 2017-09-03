@@ -24,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void onButtonClick(View v){
         Intent intent = null;
+
         switch(v.getId()){
             case R.id.show_plan_button:
                 intent = new Intent(this,ShowPlanActivity.class);
@@ -33,9 +34,6 @@ public class MenuActivity extends AppCompatActivity {
                 break;
             case R.id.training_button:
                 intent = new Intent(this,IntroductionTrainingActivity.class);
-                break;
-            case R.id.unknown_button:
-                Toast.makeText(this,"Wykup płatne DLC",Toast.LENGTH_SHORT).show();
                 break;
         }
         if (intent != null){
