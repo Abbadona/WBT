@@ -14,7 +14,7 @@ import android.widget.Button;
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText oldPassword, newPassword, repeatedPassword;
     private Button accept, cancel;
-
+    private ClientConnection client;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

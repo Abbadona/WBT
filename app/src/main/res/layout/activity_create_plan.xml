@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/create_plan_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/greybackground"
@@ -34,29 +35,32 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:gravity="center_vertical|center_horizontal|center"
+        android:textAlignment="viewStart"
         android:textColor="@android:color/background_light" />
 
     <LinearLayout
+        android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:foregroundGravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_gravity="bottom|center_vertical|center_horizontal"
-            android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
             android:onClick="ExerciseReplacementJSON"
             android:text="@string/replacement_exer"
-            android:textAlignment="center"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
+
     </LinearLayout>
+
 
 </LinearLayout>

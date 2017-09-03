@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class SignInUpActivity extends AppCompatActivity {
+    private SignInActivity signInActivity;
+    private SignUpActivity signUpActivity;
 
     @Override
     public void onBackPressed() {

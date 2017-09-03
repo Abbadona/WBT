@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 public class OptionsActivity extends AppCompatActivity {
+    private ChangePasswordActivity changePasswordActivity;
+    private ChangeTrainingDataActivity changeTrainingDataActivity;
+    private ChangeUserDataActivity changeUserDataActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

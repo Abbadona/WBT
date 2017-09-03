@@ -17,6 +17,7 @@ public class ChangeTrainingDataActivity extends AppCompatActivity implements Vie
     private EditText age, height, weight;
     private Spinner frequency, advancementLevel, goal;
     private Button accept, cancel;
+    private ClientConnection clientConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

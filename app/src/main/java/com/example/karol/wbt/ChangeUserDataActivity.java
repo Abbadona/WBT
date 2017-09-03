@@ -14,7 +14,7 @@ import android.widget.Button;
 public class ChangeUserDataActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText name, lastName, phone, email;
     private Button accept, cancel;
-
+    private ClientConnection connection;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

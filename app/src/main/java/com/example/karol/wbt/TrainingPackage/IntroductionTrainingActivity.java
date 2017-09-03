@@ -25,6 +25,8 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
     private List<Integer> id_list;
     private List<Integer> desc_list;
     private String[] order = {"one","two","three"};
+    private ClientConnection connection;
+    private WorkoutActivity workoutActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -32,7 +32,8 @@ import java.util.HashMap;
 public class EndSurvey extends MySurveyPageActivity implements View.OnClickListener {
 
     Button endButton;
-
+    MenuActivity menuActivity;
+    ClientConnection connection;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

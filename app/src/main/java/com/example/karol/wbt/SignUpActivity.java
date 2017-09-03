@@ -28,12 +28,14 @@ public class SignUpActivity extends MySurveyPageActivity {
     private EditText retryPassEditText;
     private EditText fNameEditText;
     private EditText lNameEditText;
-
+    private LearnGesture learnGesture;
+    private ContactSurvey contactSurvey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        super.gestureObject = new GestureDetectorCompat(this,new LearnGesture(this,null,new Intent(this, ContactSurvey.class)));
+        learnGesture = new LearnGesture(this,null,new Intent(this, ContactSurvey.class));
+        super.gestureObject = new GestureDetectorCompat(this,learnGesture);
         parameters = new HashMap<>();
         loginEditText = (EditText)this.findViewById(R.id.login_up_sur);
         passEditText = (EditText)this.findViewById(R.id.password_up_sur);
@@ -63,8 +65,7 @@ public class SignUpActivity extends MySurveyPageActivity {
         loadStatesOfEditText();
     }
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         addParameter(loginEditText,"login",true);
         addParameter(passEditText,"password",true);
         addParameter(fNameEditText,"name",false);
@@ -91,6 +92,7 @@ public class SignUpActivity extends MySurveyPageActivity {
         }
         return false;
     }
+
     public boolean addParameter( EditText editText, String type, boolean isRequired){
         //// TODO: 18.08.2017
         // Polskie znaki nie wchodzą!!

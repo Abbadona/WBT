@@ -71,8 +71,9 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
         description_textView = (TextView) findViewById(R.id.description_textView);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
-        Toast.makeText(this,getIntent().getExtras().getString("training_id"),Toast.LENGTH_SHORT).show();
         getDataFromServer(getIntent().getExtras().getString("training_id"));
+        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(ConfigYouTube.DEVELOPER_KEY,this);
         loadSide();
     }
 
@@ -161,7 +162,6 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
         String title = "" ,description = " ";
         Log.d("TAG_LoadSide", "left to right");
         try {
-            if (jsonArray == null) Log.d("JSON_ERROR","EMPTY");
             JSONObject jsonObject = jsonArray.getJSONObject(siteCounter);
             title = jsonObject.getString("exercise_name");
             ConfigYouTube.YOUTUBE_VIDEO_CODE = jsonObject.getString("video_link").replace("https://www.youtube.com/watch?v=","");
@@ -170,9 +170,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
             e.printStackTrace();
             title = getString(R.string.connection_error);
         } finally {
-            youTubeView = null;
-            youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-            youTubeView.initialize(ConfigYouTube.DEVELOPER_KEY,this);
+            if (this.youTubePlayer != null) this.youTubePlayer.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
             exerciseTitle.setText(title);
             description_textView.setText(description);
             editor.putString("description",description);
@@ -228,13 +226,13 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
     //Youtubowskie funkcje
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
-            this.youTubePlayer = player;
-            // loadVideo() will auto play video
-            // Use cueVideo() method, if you don't want to play it automatically
-            //this.youTubePlayer.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
-            this.youTubePlayer.cueVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
-            // Hiding player controls
-            this.youTubePlayer.setPlayerStyle(PlayerStyle.DEFAULT);
+        this.youTubePlayer = player;
+        // loadVideo() will auto play video
+        // Use cueVideo() method, if you don't want to play it automatically
+        //this.youTubePlayer.loadVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
+        this.youTubePlayer.cueVideo(ConfigYouTube.YOUTUBE_VIDEO_CODE);
+        // Hiding player controls
+        this.youTubePlayer.setPlayerStyle(PlayerStyle.DEFAULT);
     }
 
     @Override

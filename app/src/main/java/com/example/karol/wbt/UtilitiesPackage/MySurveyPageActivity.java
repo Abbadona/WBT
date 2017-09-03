@@ -31,7 +31,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     private float x1=0,x2=0;
     protected SharedPreferences preferences;
     protected SharedPreferences.Editor preferencesEditor;
-
+    private LearnGesture learnGesture;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

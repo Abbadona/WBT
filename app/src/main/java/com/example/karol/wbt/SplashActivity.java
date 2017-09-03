@@ -25,7 +25,9 @@ public class  SplashActivity extends AppCompatActivity {
     private final String PREFERENCES_NAME = "myPreferences";
     private final String PREFERENCES_IS_LOGGED= "islogged";
     private SharedPreferences preferences;
-
+    private SignInUpActivity activity;
+    private MenuActivity menu;
+    private ClientConnection clientConnection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

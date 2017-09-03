@@ -30,6 +30,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText loginEditText;
     private EditText passEditText;
 
+    private MyTextWatcher myTextWatcher;
+    private MenuActivity menu;
+    private SignInUpActivity signInUpActivity;
+    private ClientConnection clientConnection;
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getBaseContext(),SignInUpActivity.class);
