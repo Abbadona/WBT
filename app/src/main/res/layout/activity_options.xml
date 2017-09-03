@@ -44,5 +44,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/change_training_data_button"
             android:onClick="onButtonClick" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButtonClick"
+            android:text="@string/logout" />
     </LinearLayout>
 </LinearLayout>

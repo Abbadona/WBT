@@ -21,6 +21,7 @@ public class MenuActivity extends AppCompatActivity {
         // database.getReadableDatabase();
         // database.close();
     }
+
     public void onButtonClick(View v){
         Intent intent = null;
         switch(v.getId()){

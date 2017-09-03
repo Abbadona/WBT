@@ -115,4 +115,5 @@ Hold for a moment at the top of the movement and then lower slowly back down.</s
     <string name="edit_training_data">Edytuj dane treningowe</string>
     <string name="error_player">Błąd wyświetlania</string>
     <string name="end_training">Zakończ trening</string>
+    <string name="logout">Wyolguj</string>
 </resources>
