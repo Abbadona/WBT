@@ -22,14 +22,13 @@ import com.example.karol.wbt.UtilitiesPackage.MyTextWatcher;
 import org.json.JSONObject;
 import java.util.HashMap;
 
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignInActivity extends AppCompatActivity {
 
     private CheckBox remeberLogin;
     private Button signInButton;
 
     private EditText loginEditText;
     private EditText passEditText;
-
     private MyTextWatcher myTextWatcher;
     private MenuActivity menu;
     private SignInUpActivity signInUpActivity;
@@ -46,110 +45,88 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-        signInButton = (Button) findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(this);
-
         remeberLogin = (CheckBox)findViewById(R.id.remember_checkBox);
-        remeberLogin.setOnClickListener(this);
-
-
+        loginEditText= (EditText) this.findViewById(R.id.login_in);
+        passEditText = (EditText) this.findViewById(R.id.password_in);
     }
 
-    @Override
-    public void onClick(View v) {
+    private void goToMenu(){
+        if (remeberLogin.isChecked()) rememberLogin();
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
+    }
 
-        switch (v.getId()) {
+    private String hashFunction(String macAdress){
+        int intMacAddress = 0;
+        for ( int i = 0 ; i < macAdress.length(); ++i){
+            intMacAddress =+ (int)macAdress.charAt(i);
+        }
+        return new Integer(intMacAddress).toString();
+    }
 
-            case R.id.signInButton:
+    public void onLoginButtonClick(View v){
 
-                Log.d("TAG_SIGNINBUTT", "Button SignIn");
+        final HashMap<String, String> parameters = new HashMap<>();
+        //Nasłuchiwanie na działanie
+        MyTextWatcher loginWatcher = new MyTextWatcher(loginEditText);
+        loginEditText.addTextChangedListener(loginWatcher);
 
-                final HashMap<String, String> parameters = new HashMap<>();
-                loginEditText= (EditText) this.findViewById(R.id.login_in);
-                passEditText = (EditText) this.findViewById(R.id.password_in);
+        MyTextWatcher passWatcher = new MyTextWatcher(passEditText);
+        passEditText.addTextChangedListener(passWatcher);
 
-                //Nasłuchiwanie na działanie
-                MyTextWatcher loginWatcher = new MyTextWatcher(loginEditText);
-                loginEditText.addTextChangedListener(loginWatcher);
+        String password = passWatcher.getText();
+        String login = loginWatcher.getText();
+        final ClientConnection client = new ClientConnection(this, "LoginRequest", parameters);
 
-                MyTextWatcher passWatcher = new MyTextWatcher(passEditText);
-                passEditText.addTextChangedListener(passWatcher);
-
-                String password = passWatcher.getText();
-                String login = loginWatcher.getText();
-                final ClientConnection client = new ClientConnection(this, "LoginRequest", parameters);
-                Log.d("TAG_SIGNINBUTT", password+" "+login);
-
-                if (!password.equals("") || !login.equals("")) {
-                    Log.d("TAG_SIGNINBUTT", "Inside");
-                    parameters.put("login", login);
-                    parameters.put("password", password);
-                    Log.d("TAG_Device_Id",Secure.getString(this.getContentResolver(),Secure.ANDROID_ID));
-                    parameters.put("device_id","123");
-                    try {
-
-                        JSONObject jsonObject = new JSONObject(client.runConnection());
-                        if( !jsonObject.getString("message_type").equals("LoginRequest")){
-                            Log.d("TAG_Login","ThrowExcep");
-                            throw new Exception("Error");
+        if (!password.equals("") || !login.equals("")) {
+            parameters.put("login", login);
+            parameters.put("password", password);
+            parameters.put("device_id",hashFunction(Secure.getString(this.getContentResolver(),Secure.ANDROID_ID)));
+            try {
+                JSONObject jsonObject = new JSONObject(client.runConnection());
+                if( !jsonObject.getString("message_type").equals("LoginRequest"))throw new Exception("Error");
+                if (jsonObject.getBoolean("islogged"))  goToMenu();
+                else {
+                    final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
+                    LayoutInflater inflaterVerify = LayoutInflater.from(getApplicationContext());
+                    alertVerifyDialog.setView(inflaterVerify.inflate(R.layout.verify_alert, null));
+                    /*
+                    String macAddress = "123";
+                    final HashMap<String, String> verifyParametrs = new HashMap<>();
+                    verifyParametrs.put("login", parameters.get("login"));
+                    verifyParametrs.put("password", parameters.get("password"));
+                    verifyParametrs.put("device_id", macAddress);*/
+                    alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            EditText editTextVerify = (EditText) alertVerifyDialog.findViewById(R.id.verify_edit_text);
+                            parameters.put("verify_code", editTextVerify.getText().toString());
+                            try {
+                                JSONObject answer = new JSONObject(client.verifyClient(parameters));
+                                if (answer.getString("message_type").equals("AddDevice")) goToMenu();
+                                else throw new Exception("Error");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
+                                Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
+                                );
+                            }
+                            finally {finish();}
                         }
+                    });
+                    alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Anuluj", new DialogInterface.OnClickListener() {
 
-                        if (jsonObject.getBoolean("islogged")) {
-                            if (remeberLogin.isChecked()) rememberLogin();
-                            Intent intent = new Intent(this, MenuActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-                                Log.d("TAG_Verify","Inside");
-                                final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
-                                String macAddress = "123";
-                                LayoutInflater inflaterVerify = LayoutInflater.from(getApplicationContext());
-                                alertVerifyDialog.setView(inflaterVerify.inflate(R.layout.verify_alert, null));
-                                final HashMap<String, String> verifyParametrs = new HashMap<>();
-                                verifyParametrs.put("login", parameters.get("login"));
-                                verifyParametrs.put("password", parameters.get("password"));
-                                verifyParametrs.put("device_id", macAddress);
-
-                                alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        EditText editTextVerify = (EditText) alertVerifyDialog.findViewById(R.id.verify_edit_text);
-                                        verifyParametrs.put("verify_code", editTextVerify.getText().toString());
-
-                                        try {
-                                            JSONObject answer = new JSONObject(client.verifyClient(verifyParametrs));
-                                            if (answer.getString("message_type").equals("AddDevice")) {
-                                                if (remeberLogin.isChecked()) rememberLogin();
-                                                Toast.makeText(SignInActivity.this, "Zalogowano", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(SignInActivity.this.getBaseContext(),MenuActivity.class));
-                                            } else throw new Exception("Error");
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                            startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
-                                            Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
-                                            );
-                                        }
-                                        finally {finish();}
-                                    }
-                                });
-                                alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Anuluj", new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                });
-                                alertVerifyDialog.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
                         }
-                    } catch (Exception e) {
-                        Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
-                    }
+                    });
+                    alertVerifyDialog.show();
                 }
-                break;
+            } catch (Exception e) {
+                Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

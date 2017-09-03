@@ -64,6 +64,7 @@
             android:layout_gravity="center_vertical|center_horizontal|center"
             android:foregroundGravity="center_vertical|center"
             android:gravity="center_vertical|center_horizontal|center"
+            android:onClick="onLoginButtonClick"
             android:text="@string/log_in" />
 
 
