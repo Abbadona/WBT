@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class OptionsActivity extends AppCompatActivity {
-    private ChangePasswordActivity changePasswordActivity;
-    private ChangeTrainingDataActivity changeTrainingDataActivity;
-    private ChangeUserDataActivity changeUserDataActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +19,7 @@ public class OptionsActivity extends AppCompatActivity {
         startActivity(new Intent(this,MenuActivity.class));
         finish();
     }
+
     private void logout(){
         String PREFERENCES_NAME = "myPreferences";
         SharedPreferences preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);

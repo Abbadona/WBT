@@ -71,35 +71,37 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
         description_textView = (TextView) findViewById(R.id.description_textView);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
-        getDataFromServer(getIntent().getExtras().getString("training_id"));
+        jsonArray = getDataFromServer(getIntent().getExtras().getString("training_id"));
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(ConfigYouTube.DEVELOPER_KEY,this);
         loadSide();
     }
 
-    private void getDataFromServer(String training_id){
+    private JSONArray getDataFromServer(String training_id){
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("training_id",training_id);
+        JSONArray dataFromServer = null;
         try{
             JSONObject jsonAns = new JSONObject( new ClientConnection(this,"GetTraining",hashMap).runConnection());
-            Log.d("TAG_RESULT",jsonAns.toString());
-            jsonArray = new JSONArray(jsonAns.getString("exercises"));
-            siteNumber = jsonArray.length();
+            dataFromServer = new JSONArray(jsonAns.getString("exercises"));
+            siteNumber = dataFromServer.length();
             saveTrainingToDatabase();
         }catch (Exception e){
             Log.d("TAG_WORKOUT","ERROR");
-            jsonArray = null;
             siteNumber = 0;
         }
+        return dataFromServer;
     }
 
     @Override
     public void onBackPressed() {
+
         final AlertDialog alertDialog = new AlertDialog.Builder(WorkoutActivity.this).create();
-        alertDialog.setTitle("Trening");
-        alertDialog.setMessage("Czy chcesz zakończyć trening?");
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Wyjście", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(getString(R.string.workout));
+        alertDialog.setMessage(getString(R.string.end_workout_question));
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.exit_lable), new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(getBaseContext(),MenuActivity.class);
@@ -109,7 +111,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
 
         });
 
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Anuluj",new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,getString(R.string.cancel),new DialogInterface.OnClickListener() {
 
             //
             //  Kliknąłeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
@@ -119,8 +121,8 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
             }
 
         });
-        alertDialog.show();
 
+        alertDialog.show();
     }
 
     @Override
@@ -135,7 +137,6 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
                 if (deltaX < 0) {
                     if (siteCounter + 1 < siteNumber){
                         this.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                        //Toast.makeText(this,"Counter:"+siteCounter,Toast.LENGTH_SHORT).show();
                         siteCounter++;
                         loadSide();
                         Log.d("TAG_SLIDE", "right");
@@ -143,7 +144,6 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
                 } else {
                     if (siteCounter - 1 >= 0){
                         this.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-                        Toast.makeText(this,"Counter:"+siteCounter,Toast.LENGTH_SHORT).show();
                         siteCounter--;
                         loadSide();
                         Log.d("TAG_SLIDE", "left");
@@ -160,7 +160,6 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
     private void loadSide(){
 
         String title = "" ,description = " ";
-        Log.d("TAG_LoadSide", "left to right");
         try {
             JSONObject jsonObject = jsonArray.getJSONObject(siteCounter);
             title = jsonObject.getString("exercise_name");
@@ -217,6 +216,7 @@ public class WorkoutActivity extends YouTubeBaseActivity implements
                             loadSide();
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(WorkoutActivity.this,getString(R.string.invalid_replaceExercise),Toast.LENGTH_LONG).show();
                         }
                     }});
         AlertDialog alertDialog = builder.create();

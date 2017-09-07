@@ -4,10 +4,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-/**
- * Created by Karol on 02.03.2017.
- */
-
 public class MyTextWatcher implements TextWatcher {
 
     private EditText myEditText;

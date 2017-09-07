@@ -29,7 +29,7 @@ public class SignUpActivity extends MySurveyPageActivity {
     private EditText fNameEditText;
     private EditText lNameEditText;
     private LearnGesture learnGesture;
-    private ContactSurvey contactSurvey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,12 +98,12 @@ public class SignUpActivity extends MySurveyPageActivity {
         // Polskie znaki nie wchodzą!!
         String text = editText.getText().toString();
         if ( isRequired && text.trim().equals("")){
-            editText.setError("Wpisz dane");
+            editText.setError(getString(R.string.fill_field));
             return false;
         }else{
             //
             if ( !text.matches("^[a-zA-Z0-9]*$")){
-                editText.setError("Wpisz tylko litery i cyfry");
+                editText.setError(getString(R.string.only_numbers_and_letter));
                 text = "";
                 return false;
             }else{

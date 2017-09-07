@@ -15,12 +15,7 @@ import java.util.List;
 
 public class ClientConnection {
 
-    //UWAGA!! Zmienna volatile jest po to aby ułatwić
-    //        synchronizację procesów ( funkcji runConnectionoraz doInBackground)
-    //
-    //Flaga czy udało nam się odpowienio połąćzyć z serverm
     private static volatile boolean isConnected = false;
-    //Jak ja żałuje że nia ma plików nagłówkowych...cały ten syf był by uporządkowany...
 
     private static volatile String messageResult = "ERROR";
 

@@ -1,6 +1,19 @@
 <resources>
     <string name="workout">Trening</string>
-    <string name="connection_error">Błąd Połączenia</string>
+    <string name="connection">Połączenie</string>
+    <string name="connect_to">Połącz</string>
+    <string name="fill_field">Wypełnij pole</string>
+    <string name="signed_in">Zalogowano</string>
+    <string name="not_signin">Nie jesteś zalogowany!</string>
+    <string name="only_numbers_and_letter">Wpisz tylko litery i cyfry</string>
+    <string name="send">Wyślij</string>
+    <string name="registration">Rejestracja</string>
+    <string name="verify_error">Błędna weryfikacja</string>
+    <string name="sign_in_error">Błąd logowania - złe hasło lub login</string>
+    <string name="end_workout_question">Czy chcesz zakończyć trening?</string>
+    <string name="invalid_replaceExercise">Nie udało się zamienić ćwiczenia</string>
+    <string name="connection_error">Błąd połączenia</string>
+    <string name="connection_or_load_error">Błąd połączenia lub wczytania danych!</string>
     <string name="create_plan">Stwórz plan</string>
     <string name="show_plan">Pokaż plan</string>
     <string name="future_option">Nie wiem</string>

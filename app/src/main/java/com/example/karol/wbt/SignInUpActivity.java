@@ -20,16 +20,12 @@ public class SignInUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_up);
         AlertDialog alertDialog = new AlertDialog.Builder(SignInUpActivity.this).create();
-        alertDialog.setTitle("Połączenie");
-        alertDialog.setMessage("Nie jesteś zalogowany!");
+        alertDialog.setTitle(getString(R.string.connection));
+        alertDialog.setMessage(getString(R.string.not_signin));
         alertDialog.setCancelable(false);
-        //  Kod MAC urządzenia
-        //WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        //WifiInfo info = manager.getConnectionInfo();
-        //final String macAddress = info.getMacAddress();
 
         //---------------------------------------PRZYCISK--ZALOGUJ------------------------------
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Logowanie", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.login_text), new DialogInterface.OnClickListener() {
 
             //
             //  Kliknąłeś w Zaloguj, więc wyświetla się alertdialog związany z logowaniem
@@ -44,7 +40,7 @@ public class SignInUpActivity extends AppCompatActivity {
 
         });
         //---------------------PRYCISK--REJESTRUJ-----------------------------
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Rejestracja",new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,getString(R.string.registration),new DialogInterface.OnClickListener() {
 
             //
             //  Kliknąłeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
@@ -59,4 +55,5 @@ public class SignInUpActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
+
 }

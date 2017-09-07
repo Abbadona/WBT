@@ -54,7 +54,7 @@ public class SignInActivity extends AppCompatActivity {
         if (remeberLogin.isChecked()) rememberLogin();
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
-        Toast.makeText(this, "Zalogowano", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.signed_in), Toast.LENGTH_SHORT).show();
     }
 
     private String hashFunction(String macAdress){
@@ -91,13 +91,7 @@ public class SignInActivity extends AppCompatActivity {
                     final AlertDialog alertVerifyDialog = new AlertDialog.Builder(this).create();
                     LayoutInflater inflaterVerify = LayoutInflater.from(getApplicationContext());
                     alertVerifyDialog.setView(inflaterVerify.inflate(R.layout.verify_alert, null));
-                    /*
-                    String macAddress = "123";
-                    final HashMap<String, String> verifyParametrs = new HashMap<>();
-                    verifyParametrs.put("login", parameters.get("login"));
-                    verifyParametrs.put("password", parameters.get("password"));
-                    verifyParametrs.put("device_id", macAddress);*/
-                    alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Wyślij", new DialogInterface.OnClickListener() {
+                    alertVerifyDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.send), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             EditText editTextVerify = (EditText) alertVerifyDialog.findViewById(R.id.verify_edit_text);
@@ -109,13 +103,13 @@ public class SignInActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 startActivity(new Intent(SignInActivity.this.getBaseContext(),SignInUpActivity.class));
-                                Toast.makeText(SignInActivity.this, "Błędna weryfikacja", Toast.LENGTH_SHORT).show(
+                                Toast.makeText(SignInActivity.this, getString(R.string.verify_error), Toast.LENGTH_SHORT).show(
                                 );
                             }
                             finally {finish();}
                         }
                     });
-                    alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Anuluj", new DialogInterface.OnClickListener() {
+                    alertVerifyDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -125,7 +119,7 @@ public class SignInActivity extends AppCompatActivity {
                     alertVerifyDialog.show();
                 }
             } catch (Exception e) {
-                Toast.makeText(this,"Błąd logowania - złe hasło lub login",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getString(R.string.sign_in_error),Toast.LENGTH_SHORT).show();
             }
         }
     }

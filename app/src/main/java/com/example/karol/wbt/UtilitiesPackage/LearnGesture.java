@@ -17,15 +17,14 @@ public class LearnGesture extends GestureDetector.SimpleOnGestureListener {
     public LearnGesture(Context context, Intent prev, Intent next){
 
         this.context = context;
-
         prevActivity = prev;
-
         nextActivity = next;
 
     }
 
     @Override
     public boolean onFling(MotionEvent event1, MotionEvent event2, float X,float Y){
+
         if ( event2.getX() > event1.getX()){//Swap left to right
             if ( prevActivity != null){
                 context.startActivity(prevActivity);

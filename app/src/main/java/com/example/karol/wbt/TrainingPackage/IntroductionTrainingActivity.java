@@ -25,8 +25,6 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
     private List<Integer> id_list;
     private List<Integer> desc_list;
     private String[] order = {"one","two","three"};
-    private ClientConnection connection;
-    private WorkoutActivity workoutActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +42,7 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
     }
 
     private void loadContent(){
-        //// TODO: 30.08.2017
-        /*  W getTrainingMap są propozycję treningów
-                    czyli id treningu oraz opis
-                    Parametry wyglądają następująco
-                    (training_1,"jakis numer")
-                    (training_2,"jakis numer2")
-                    ...
-                    (training_n,"jakis numer_n")
-                    (description_1,"jakis numer")
-                    (description_2,"jakis numer")
-                    ...
-                    (description_n,"jakis numer")
-                     training_1,description_1 trzeba zapisać w jednym wierszu
-         */
+
         HashMap<String,String> mapOfTraining = getTrainingMap();
         int i = 0;
         while (i < 3 ){
@@ -66,9 +51,7 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
             id_textView.setText(mapOfTraining.get("training_"+order[i]));
             desc_textView.setText(mapOfTraining.get("description_"+order[i]));
             i++;
-            //saveToDataBase();
         }
-        //saveToDataBase();
     }
 
     private HashMap<String,String> getTrainingMap()  {
@@ -79,7 +62,6 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
             ClientConnection clientConnection = new ClientConnection(this,"TrainingProposition");
             String result = clientConnection.runConnection();
             JSONObject jsonAns = new JSONObject(result);
-            Log.d("INTR_JSONANS",jsonAns.toString());
             JSONArray jsonArray = new JSONArray(jsonAns.getString("trainings"));
             for ( int i = 0 ; i < jsonArray.length(); ++i ){
                 JSONObject jsonTmp = jsonArray.getJSONObject(i);
@@ -91,10 +73,10 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
             AlertDialog alertDialog = new AlertDialog.Builder(IntroductionTrainingActivity.this).create();
-            alertDialog.setTitle("Połączenie");
-            alertDialog.setMessage("Błąd połączenia lub wczytania danych!");
+            alertDialog.setTitle(getString(R.string.connection));
+            alertDialog.setMessage(getString(R.string.connection_or_load_error));
             alertDialog.setCancelable(false);
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Wyjście", new DialogInterface.OnClickListener() {
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.exit_lable), new DialogInterface.OnClickListener() {
 
                 //
                 //  Kliknąłeś w Zaloguj, więc wyświetla się alertdialog związany z logowaniem
@@ -106,7 +88,7 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
                 }
 
             });
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,"Połącz",new DialogInterface.OnClickListener() {
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,getString(R.string.connect_to),new DialogInterface.OnClickListener() {
 
                 //
                 //  Kliknąłeś w Rejestracje, więc tworzymy alterDialog dla Rejestracji
@@ -139,10 +121,6 @@ public class IntroductionTrainingActivity extends AppCompatActivity {
         intent.putExtra("training_id",training_id);
         startActivity(intent);
         finish();
-    }
-
-    private void saveToDataBase(){
-        //// TODO: 30.08.2017
     }
 
     @Override

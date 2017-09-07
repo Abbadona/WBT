@@ -20,10 +20,6 @@ import java.util.List;
 import java.util.Map;
 import android.widget.RadioButton;
 
-/**
- * Created by Karol on 14.03.2017.
- */
-
 public abstract class MySurveyPageActivity extends AppCompatActivity {
 
     private String PREFERENCES_NAME = "survey_preferences";
@@ -31,18 +27,12 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     private float x1=0,x2=0;
     protected SharedPreferences preferences;
     protected SharedPreferences.Editor preferencesEditor;
-    private LearnGesture learnGesture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences(PREFERENCES_NAME, Activity.MODE_PRIVATE);
         preferencesEditor = preferences.edit();
-    }
-
-    protected void clearPreferences(){
-        preferencesEditor.clear();
-        preferencesEditor.apply();
-        preferencesEditor.commit();
     }
 
     protected void clearPreferences(List<String> parameters){
@@ -83,7 +73,6 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
             case MotionEvent.ACTION_UP:
                 x2 = event.getX();
                 float deltaX = x2 - x1;
-                Log.d("TAG_deltaX", deltaX + "");
                 if (deltaX < 0) {
                     this.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     Log.d("TAG_SLIDE", "right to left");
@@ -117,7 +106,7 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
 
     protected boolean isEditTextFilled(EditText editText){
         if (editText.getText().toString().trim().equals("")){
-            editText.setError("Wypełnij pole");
+            editText.setError(getString(R.string.fill_field));
             return false;
         }
         return true;
@@ -127,4 +116,5 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     public void onBackPressed() {
         //Ta klasa ma być pusta aby nie móc się cofnąć!
     }
+
 }

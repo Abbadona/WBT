@@ -25,9 +25,7 @@ public class  SplashActivity extends AppCompatActivity {
     private final String PREFERENCES_NAME = "myPreferences";
     private final String PREFERENCES_IS_LOGGED= "islogged";
     private SharedPreferences preferences;
-    private SignInUpActivity activity;
-    private MenuActivity menu;
-    private ClientConnection clientConnection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +59,7 @@ public class  SplashActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 intent =  new Intent(SplashActivity.this,SignInActivity.class);
-                                Toast.makeText(SplashActivity.this,"Nie udało się połączyć",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SplashActivity.this,getString(R.string.connection_error),Toast.LENGTH_SHORT).show();
                             }
                         }
                         else {
