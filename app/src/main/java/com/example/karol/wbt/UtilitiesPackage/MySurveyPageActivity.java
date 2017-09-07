@@ -6,14 +6,10 @@ import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Pair;
 import android.view.MotionEvent;
 import android.widget.EditText;
-
 import com.example.karol.wbt.R;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -116,5 +112,4 @@ public abstract class MySurveyPageActivity extends AppCompatActivity {
     public void onBackPressed() {
         //Ta klasa ma być pusta aby nie móc się cofnąć!
     }
-
 }

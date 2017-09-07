@@ -1,10 +1,6 @@
 package com.example.karol.wbt.ConnectionPackage;
 
 import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,9 +13,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-
 import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 
 public class SSLConnector {
 
@@ -93,6 +87,5 @@ public class SSLConnector {
             return instance;
         }
     }//koniec getInstance()
-
 
 }//koniec klasy SSLConnector
