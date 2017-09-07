@@ -34,13 +34,6 @@
             android:text="@string/show_plan" />
 
         <Button
-            android:id="@+id/unknown_button"
-            android:layout_width="187dp"
-            android:layout_height="wrap_content"
-            android:onClick="onButtonClick"
-            android:text="@string/future_option" />
-
-        <Button
             android:id="@+id/options_button"
             android:layout_width="187dp"
             android:layout_height="wrap_content"
