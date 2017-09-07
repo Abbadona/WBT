@@ -2,16 +2,10 @@ package com.example.karol.wbt.ConnectionPackage;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.util.Pair;
-
 import com.example.karol.wbt.R;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 
 public class ClientConnection {
 
@@ -80,5 +74,4 @@ public class ClientConnection {
             return null;
         }
     }
-
 }

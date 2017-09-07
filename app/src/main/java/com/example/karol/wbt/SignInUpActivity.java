@@ -55,5 +55,4 @@ public class SignInUpActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
-
 }

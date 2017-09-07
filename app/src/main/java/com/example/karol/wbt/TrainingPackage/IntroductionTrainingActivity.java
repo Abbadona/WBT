@@ -2,11 +2,9 @@ package com.example.karol.wbt.TrainingPackage;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
@@ -16,9 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
 
 public class IntroductionTrainingActivity extends AppCompatActivity {
 

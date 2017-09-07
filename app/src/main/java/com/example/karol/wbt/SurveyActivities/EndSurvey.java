@@ -1,30 +1,17 @@
 package com.example.karol.wbt.SurveyActivities;
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
 import com.example.karol.wbt.MenuActivity;
 import com.example.karol.wbt.R;
 import com.example.karol.wbt.SignInUpActivity;
-import com.example.karol.wbt.SignUpActivity;
-import com.example.karol.wbt.UtilitiesPackage.LearnGesture;
 import com.example.karol.wbt.UtilitiesPackage.MySurveyPageActivity;
-
 import android.content.Intent;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

@@ -2,23 +2,15 @@ package com.example.karol.wbt;
 
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.EditText;
-
 import com.example.karol.wbt.SurveyActivities.ContactSurvey;
-import com.example.karol.wbt.SurveyActivities.FrequencySurvey;
 import com.example.karol.wbt.UtilitiesPackage.LearnGesture;
 import com.example.karol.wbt.UtilitiesPackage.MySurveyPageActivity;
-
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 public class SignUpActivity extends MySurveyPageActivity {
 

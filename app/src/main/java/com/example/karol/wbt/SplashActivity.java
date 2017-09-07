@@ -1,23 +1,17 @@
 package com.example.karol.wbt;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.karol.wbt.ConnectionPackage.ClientConnection;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 
 public class  SplashActivity extends AppCompatActivity {
